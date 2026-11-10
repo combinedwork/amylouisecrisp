@@ -1,0 +1,503 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbf7ef">
+<title>Amy Louise Crisp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="home">
+
+<header id="hdr">
+  <div class="wrap head">
+    <a href="index.html" class="brand"><span class="name">Amy Louise Crisp</span><span class="tag">Family recipes you'll actually make</span></a>
+    <nav id="nav">
+      <ul>
+        <li><a href="index.html" data-nav="home">Home</a></li>
+        <li><a href="recipes.html" data-nav="recipes">Recipes</a></li>
+        <li><a href="recipes.html#30" data-nav="recipes">30 Minute Meals</a></li>
+        <li><a href="recipes.html#lunch" data-nav="recipes">Lunchbox Line Up</a></li>
+        <li><a href="recipes.html#slow" data-nav="recipes">Slow Cooker Stash</a></li>
+        <li><a href="about.html" data-nav="about">About Me</a></li>
+      </ul>
+    </nav>
+    <div class="icons">
+      <button class="icon-btn" id="favBtn" aria-label="Saved recipes" title="Saved recipes"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span class="count" id="favCount">0</span></button>
+      <button class="icon-btn" id="searchBtn" aria-label="Search" title="Search ( / )"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div class="reveal">
+        <span class="eyebrow">Welcome to Amy Louise Crisp</span>
+        <h1>Family recipes you’ll <em>actually</em> make</h1>
+        <p>Hi, I’m Amy! A mum of two who loves sharing easy family dinners, delicious baking and lunchbox inspiration.</p>
+        <p>Cooking from scratch doesn’t need to be complicated, expensive or take hours in the kitchen. So grab a cuppa and find something delicious to make!</p>
+        <div class="cta">
+          <a href="#latest" class="btn">Browse Recipes</a>
+          <a href="about.html" class="btn line">About Me</a>
+        </div>
+      </div>
+      <div class="hero-img reveal carousel" id="carousel" role="region" aria-roledescription="carousel" aria-label="Featured recipes" tabindex="0">
+        <div class="frame">
+          <div class="slide on" aria-roledescription="slide" aria-label="1 of 4"><img src="img/pasta.jpg" alt="Creamy chicken pesto pasta in a pan" style="object-position:40% 55%"></div>
+          <div class="slide" aria-roledescription="slide" aria-label="2 of 4" aria-hidden="true"><img src="img/sq-7-1.jpg" alt="Pepperoni pizza fresh out of the pan" style="object-position:50% 55%" loading="lazy"></div>
+          <div class="slide" aria-roledescription="slide" aria-label="3 of 4" aria-hidden="true"><img src="img/sq-21.jpg" alt="Amy holding a freshly baked cookie" style="object-position:50% 35%" loading="lazy"></div>
+          <div class="slide" aria-roledescription="slide" aria-label="4 of 4" aria-hidden="true"><img src="img/hero.jpg" alt="Amy tasting food from a pan in her kitchen" loading="lazy"></div>
+          <button class="car-btn prev" aria-label="Previous slide"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button class="car-btn next" aria-label="Next slide"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button>
+          <div class="car-dots" role="tablist" aria-label="Choose slide">
+            <button role="tab" aria-label="Slide 1" class="on"><i></i></button><button role="tab" aria-label="Slide 2"><i></i></button><button role="tab" aria-label="Slide 3"><i></i></button><button role="tab" aria-label="Slide 4"><i></i></button>
+          </div>
+          <button class="car-pause" aria-label="Pause slideshow"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
+        </div>
+        <a href="#recipe" class="sticker" id="carSticker" aria-live="polite"><span class="dot">20</span><span class="st-txt"><b>Creamy Chicken Pesto Pasta</b>New recipe · ready in 20 mins</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DINNER PICKER -->
+  <div class="picker">
+    <div class="wrap">
+      <span class="q">What are you in the mood for?</span>
+      <div class="pills" id="moodPills">
+        <button class="pill" data-mood="quick">Something quick</button>
+        <button class="pill" data-mood="comfort">Comfort food</button>
+        <button class="pill" data-mood="sweet">A sweet treat</button>
+        <button class="pill" data-mood="lunch">School lunches</button>
+      </div>
+      <div class="picker-out" id="moodOut"></div>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <section id="categories">
+    <div class="wrap">
+      <div class="sec-head reveal"><div><span class="eyebrow">Browse by category</span><h2>Find Something Delicious</h2></div><a href="recipes.html" class="more">All recipes →</a></div>
+      <div class="cats">
+        <a class="cat reveal" href="recipes.html#dinners"><div class="ph"><img src="img/sq-7-1.jpg" alt=""></div><h3>Easy Family Dinners</h3><p>Weeknight wins the whole family will love</p></a>
+        <a class="cat reveal" href="recipes.html#slow"><div class="ph"><img src="img/sq-33-1.jpg" alt=""></div><h3>Slow Cooker Stash</h3><p>Pop it on in the morning, dinner’s done</p></a>
+        <a class="cat reveal" href="recipes.html#lunch"><div class="ph"><img src="img/hero.jpg" alt="" style="object-position:70% 50%"></div><h3>Lunchbox Line Up</h3><p>Packed lunch ideas kids actually eat</p></a>
+        <a class="cat reveal" href="recipes.html#baking"><div class="ph"><img src="img/sq-21.jpg" alt=""></div><h3>Baking</h3><p>Bakes, treats and something for the tin</p></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE RECIPE -->
+  <section class="featured" id="recipe">
+    <div class="wrap rec">
+      <div class="ph reveal"><img src="img/pasta.jpg" alt="Amy holding a pan of creamy chicken pesto pasta" style="object-position:35% 50%"></div>
+      <div class="reveal">
+        <span class="eyebrow">Latest recipe · 30 Minute Meals</span>
+        <h2>Creamy Chicken Pesto Pasta</h2>
+        <p class="intro">One of those easy family dinners you’ll find yourself making again and again! Packed with flavour, wonderfully creamy and perfect for busy weeknights.</p>
+        <div class="facts">
+          <div><small>Prep</small><b>5m</b></div>
+          <div><small>Cook</small><b>15m</b></div>
+          <div><small>Total</small><b>20m</b></div>
+          <div><small>Serves</small><span class="stepper"><button id="sMinus" aria-label="Fewer servings">−</button><b id="serves">4</b><button id="sPlus" aria-label="More servings">+</button></span></div>
+        </div>
+        <div class="actions">
+          <button class="btn dark" id="cookBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Start Cook Mode</button>
+          <button class="btn line" id="saveRecipe" data-id="pesto-pasta">♡ Save recipe</button>
+          <button class="btn line" onclick="window.print()">Print</button>
+        </div>
+
+        <div class="tabbar" role="tablist">
+          <button class="on" data-tab="ing" role="tab">Ingredients</button>
+          <button data-tab="method" role="tab">Method</button>
+          <button data-tab="video" role="tab"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="margin-right:5px;vertical-align:-1px"><path d="M7 4v16l13-8z"/></svg>Video</button>
+          <button data-tab="tips" role="tab"><span class="t-full">Tips &amp; Storage</span><span class="t-short">Tips</span></button>
+        </div>
+
+        <div class="panel on" id="p-ing">
+          <div id="ingList"></div>
+          <div class="progress-note" id="ingNote">Tick things off as you gather them.</div>
+        </div>
+
+        <div class="panel" id="p-method">
+          <ol class="steps" id="stepList"></ol>
+          <div class="progress-note">Tap a step to mark it done.</div>
+        </div>
+
+        <div class="panel" id="p-video">
+          <div class="video-frame card-video">
+            <button class="video-poster" aria-label="Play video: Can I Make Creamy Chicken Pesto Pasta in 30 Minutes?">
+              <img src="img/pasta.jpg" alt="" style="object-position:40% 50%">
+              <span class="play"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+              <span class="video-label"><b>Watch me make it</b><small>See every step in action</small></span>
+            </button>
+          </div>
+          <p class="progress-note">Want to cook along? Press play, then tap <a href="#" class="open-cook" style="color:var(--sage-dd);font-weight:700;text-decoration:underline">Start Cook Mode</a> to follow the steps one at a time. <a href="https://youtu.be/FvktW_5l0nY" target="_blank" rel="noopener" style="text-decoration:underline">Watch on YouTube ↗</a></p>
+        </div>
+
+        <div class="panel" id="p-tips">
+          <details class="tip" open><summary>Recipe tips</summary><p>For a thinner sauce, add a splash of reserved pasta water or extra milk. You can also swap the mushrooms for spinach or leave them out entirely.</p></details>
+          <details class="tip"><summary>Make ahead</summary><p>Chop the chicken, onion and mushrooms in advance and keep them covered in the fridge. Keep raw chicken separate from the vegetables.</p></details>
+          <details class="tip"><summary>Leftovers</summary><p>Cool quickly, then refrigerate in an airtight container within 2 hours. Eat within 48 hours. Reheat until piping hot with a splash of milk. Only reheat once.</p></details>
+          <details class="tip"><summary>Freezing</summary><p>Best enjoyed fresh, as creamy sauces can change texture. If freezing, portion, freeze promptly and defrost fully in the fridge before reheating thoroughly.</p></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section class="video-sec" id="video">
+    <div class="wrap video-grid">
+      <div class="video-copy reveal">
+        <span class="eyebrow">Watch &amp; cook along</span>
+        <h2>Can I make Creamy Chicken Pesto Pasta in 30 minutes?</h2>
+        <p>Grab a cuppa and join me in the kitchen! I’ll show you step by step how this creamy, cheesy family favourite comes together, from a silky homemade pesto sauce to that bubbling golden topping.</p>
+        <ul class="video-points">
+          <li><span>20</span>Minutes from start to finish</li>
+          <li><span>4</span>Hungry people fed</li>
+          <li><span>2</span>Pans: just a frying pan and a saucepan</li>
+        </ul>
+        <div class="video-cta">
+          <a href="#recipe" class="btn">Get the Recipe</a>
+          <a href="https://youtu.be/FvktW_5l0nY" target="_blank" rel="noopener" class="btn line">Watch on YouTube ↗</a>
+        </div>
+      </div>
+      <div class="video-wrap reveal">
+        <div class="video-frame" id="videoFrame">
+          <button class="video-poster" id="videoPlay" aria-label="Play video: Can I Make Creamy Chicken Pesto Pasta in 30 Minutes?">
+            <img src="img/pasta.jpg" alt="" style="object-position:40% 50%">
+            <span class="play"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="video-label"><b>Watch me make it</b><small>Creamy Chicken Pesto Pasta · YouTube</small></span>
+          </button>
+        </div>
+        <p class="video-note">Video not playing? <a href="https://youtu.be/FvktW_5l0nY" target="_blank" rel="noopener">Watch it on YouTube</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LATEST -->
+  <section id="latest">
+    <div class="wrap">
+      <div class="sec-head reveal"><div><span class="eyebrow">Fresh from my kitchen</span><h2>Latest Recipes</h2></div><a href="recipes.html" class="more">See all recipes →</a></div>
+      <div class="filters reveal" id="filters">
+        <button class="on" data-filter="all">All</button>
+        <button data-filter="dinners">Easy Family Dinners</button>
+        <button data-filter="30">30 Minute Meals</button>
+        <button data-filter="slow">Slow Cooker Stash</button>
+        <button data-filter="lunch">Lunchbox Line Up</button>
+        <button data-filter="baking">Baking</button>
+        <button data-filter="saved">♥ Saved</button>
+      </div>
+      <div class="grid" id="grid">
+        <div class="card reveal" data-cats="dinners 30" data-id="pesto-pasta">
+          <button class="heart" aria-label="Save Creamy Chicken Pesto Pasta"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+          <a href="#recipe"><div class="ph"><img src="img/pasta.jpg" alt="Creamy chicken pesto pasta" style="object-position:30% 50%"><span class="badge">New</span></div><span class="label">Easy Family Dinners</span><h3>Creamy Chicken Pesto Pasta</h3><span class="meta">20 mins · Serves 4</span></a>
+        </div>
+        <div class="card reveal" data-cats="slow" data-id="slow-1">
+          <button class="heart" aria-label="Save recipe"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+          <a href="#"><div class="ph soon">Coming soon</div><span class="label">Slow Cooker Stash</span><h3>Your next slow cooker recipe</h3><span class="meta">Example placeholder</span></a>
+        </div>
+        <div class="card reveal" data-cats="lunch" data-id="lunch-1">
+          <button class="heart" aria-label="Save recipe"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+          <a href="#"><div class="ph soon">Coming soon</div><span class="label">Lunchbox Line Up</span><h3>Your next lunchbox idea</h3><span class="meta">Example placeholder</span></a>
+        </div>
+        <div class="card reveal" data-cats="baking" data-id="bake-1">
+          <button class="heart" aria-label="Save recipe"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+          <a href="#"><div class="ph soon">Coming soon</div><span class="label">Baking</span><h3>Your next bake</h3><span class="meta">Example placeholder</span></a>
+        </div>
+        <div class="empty" id="empty"><b class="serif" style="font-size:22px">Nothing here yet</b><p style="margin:6px 0 0">Tap the ♡ on any recipe to save it for later.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="wrap about-grid">
+      <div class="ph reveal"><img src="img/sq-21.jpg" alt="Portrait of Amy in her kitchen"></div>
+      <div class="reveal">
+        <span class="eyebrow">About Me</span>
+        <h2>Hi, I’m Amy!</h2>
+        <p>I’m a mum of two who loves sharing easy family dinners, delicious baking and lunchbox inspiration.</p>
+        <p>I believe cooking from scratch doesn’t need to be complicated, expensive or take hours in the kitchen. Here you’ll find simple, family‑friendly recipes you’ll actually want to make again and again!</p>
+        <div class="sig">Amy x</div>
+        <a href="about.html" class="btn line">Read my story</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter">
+    <div class="wrap">
+      <div class="news reveal">
+        <div>
+          <h2>New recipes, straight to your inbox</h2>
+          <p>Be the first to get my latest family dinners, bakes and lunchbox ideas. Easy to follow and made with everyday ingredients.</p>
+        </div>
+        <div id="newsWrap">
+          <form id="newsForm" novalidate>
+            <input type="email" id="email" placeholder="Your email address" aria-label="Email address">
+            <button class="btn" type="submit">Sign me up</button>
+            <div class="opts" aria-label="I'd love recipes for">
+              <label><input type="checkbox" checked> Dinners</label>
+              <label><input type="checkbox"> Baking</label>
+              <label><input type="checkbox"> Lunchboxes</label>
+            </div>
+            <div class="err" id="err" role="alert"></div>
+          </form>
+          <small>No spam, just recipes. Unsubscribe anytime.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="index.html" class="brand"><span class="name">Amy Louise Crisp</span><span class="tag">Family recipes you'll actually make</span></a>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3c-2.8 0-4 1.8-4 4.5V11H7v4h3v7h4v-7h3l1-4h-4V8.6c0-.4.3-.6.6-.6z"/></svg></a>
+          <a href="#" aria-label="Pinterest"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.2-2 0-2.9l1.2-5s-.3-.6-.3-1.5c0-1.4.8-2.4 1.8-2.4.9 0 1.3.6 1.3 1.4 0 .9-.5 2.1-.8 3.3-.2 1 .5 1.8 1.5 1.8 1.8 0 3.1-1.9 3.1-4.6 0-2.4-1.7-4.1-4.2-4.1-2.9 0-4.5 2.1-4.5 4.4 0 .9.3 1.8.8 2.3l.1.4-.3 1.1c0 .2-.2.3-.4.2-1.3-.6-2.1-2.5-2.1-4C5.6 8.2 8 5 12.6 5c3.7 0 6.5 2.6 6.5 6.2 0 3.7-2.3 6.6-5.5 6.6-1.1 0-2.1-.6-2.4-1.2l-.7 2.5c-.2.9-.9 2.1-1.3 2.8A10 10 0 1 0 12 2z"/></svg></a>
+        </div>
+      </div>
+      <div><h4>Recipes</h4><ul><li><a href="recipes.html#dinners">Easy Family Dinners</a></li><li><a href="recipes.html#30">30 Minute Meals</a></li><li><a href="recipes.html#slow">Slow Cooker Stash</a></li><li><a href="recipes.html#lunch">Lunchbox Line Up</a></li><li><a href="recipes.html#baking">Baking</a></li></ul></div>
+      <div><h4>More</h4><ul><li><a href="about.html">About Me</a></li><li><a href="about.html#contact">Contact</a></li><li><a href="#newsletter">Newsletter</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
+    </div>
+    <div class="legal">© 2026 Amy Louise Crisp</div>
+  </div>
+</footer>
+
+<!-- COOK MODE -->
+<div class="cook" id="cook" role="dialog" aria-modal="true" aria-label="Cook mode">
+  <div class="cook-top">
+    <span class="serif">Creamy Chicken Pesto Pasta</span>
+    <div style="display:flex;gap:14px;align-items:center">
+      <label class="wake"><input type="checkbox" id="wake"> Keep screen on</label>
+      <button class="close" id="cookClose" aria-label="Exit cook mode">✕</button>
+    </div>
+  </div>
+  <div class="bar"><i id="cookBar"></i></div>
+  <div class="cook-body">
+    <div class="n" id="cookN"></div>
+    <p id="cookStep"></p>
+    <div class="timer" id="timer">
+      <span class="t" id="tDisp">0:00</span>
+      <button data-add="60">+1 min</button><button data-add="300">+5 min</button>
+      <button id="tGo">Start</button><button id="tReset">Reset</button>
+    </div>
+    <div class="swipe-hint">Swipe left or right to change step</div>
+  </div>
+  <div class="cook-nav">
+    <button class="btn ghost" id="prev">← Back</button>
+    <button class="btn" id="next">Next step →</button>
+  </div>
+</div>
+
+
+<script src="site.js"></script>
+<script>
+(() => {
+  const { $, $$, toast, favs, toggleFav, onFavs, swipe } = window.ALC;
+
+  /* ---------- recipe ---------- */
+  const BASE = 4;
+  const ING = [
+    {g:'Pasta & Chicken', items:[[300,'g','dried pasta'],[1,'tbsp','olive oil'],[500,'g','chicken breasts, diced'],[1,'','white onion, chopped'],[150,'g','mushrooms, sliced']]},
+    {g:'Creamy Pesto Sauce', items:[[50,'g','butter'],[50,'g','plain flour'],[500,'ml','milk'],[.5,'jar','green pesto'],[50,'g','mozzarella'],[30,'g','Parmesan'],[null,'','Extra mozzarella and Parmesan, to top (optional)']]}
+  ];
+  const STEPS = [
+    'Bring a large saucepan of salted water to the boil. Cook the pasta according to the packet instructions, then drain, reserving a little pasta water.',
+    'Heat the olive oil in a large frying pan. Add the diced chicken and cook until lightly golden.',
+    'Add the chopped onion and sliced mushrooms to the pan. Continue cooking until the vegetables have softened and the chicken is cooked all the way through.',
+    'Add the butter and allow it to melt, then stir in the flour. Cook for around 1 minute before gradually pouring in the milk, stirring continuously until you have a smooth, thickened sauce.',
+    'Stir through the green pesto, mozzarella and Parmesan over a low heat until the cheese has melted and everything is combined.',
+    'Add the drained pasta and stir everything together until well coated in the creamy pesto sauce. Add a splash of reserved pasta water if needed to loosen the sauce.',
+    'Optional: top with extra mozzarella and Parmesan, then pop under the grill until golden and bubbling.'
+  ];
+  const STEP_TIMER = {3:60};
+  const fr = n => { const w=Math.floor(n), f=n-w, m={.25:'¼',.5:'½',.75:'¾'}; const k=Object.keys(m).find(x=>Math.abs(f-x)<.07);
+    if (f<.07) return String(w||''); if (k) return (w||'')+m[k]; if (Math.abs(f-1/3)<.05) return (w||'')+'⅓'; if (Math.abs(f-2/3)<.05) return (w||'')+'⅔'; return n.toFixed(1); };
+  const fmt = (q,u,s) => { if(q==null) return ''; const v=q*s/BASE;
+    if (u==='g'||u==='ml') return Math.max(5, Math.round(v/5)*5)+u+' ';
+    return fr(v)+(u?' '+u:'')+' '; };
+  let serves = BASE; const checked = new Set();
+  const TOTAL_ING = ING.reduce((a,g)=>a+g.items.length,0);
+  const noteIng = () => { const n=checked.size; $('#ingNote').textContent = n===0 ? 'Tick things off as you gather them.' : n===TOTAL_ING ? 'Everything’s ready. Time to cook! 🎉' : `${n} of ${TOTAL_ING} gathered`; };
+  const renderIng = () => {
+    let h='', i=0;
+    ING.forEach(grp => { h += `<div class="ing-group">${grp.g}</div><ul class="ing">`;
+      grp.items.forEach(([q,u,n]) => { const id=i++; h += `<li><label><input type="checkbox" data-i="${id}" ${checked.has(id)?'checked':''}><span><span class="amt">${fmt(q,u,serves)}</span>${n}</span></label></li>`; });
+      h += '</ul>'; });
+    $('#ingList').innerHTML = h; noteIng();
+  };
+  $('#ingList').addEventListener('change', e => { const i=+e.target.dataset.i; e.target.checked?checked.add(i):checked.delete(i); noteIng(); });
+  const setServes = n => { serves=Math.min(12,Math.max(1,n)); const b=$('#serves'); b.textContent=serves; b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump'); renderIng(); };
+  $('#sMinus').onclick = () => setServes(serves-1);
+  $('#sPlus').onclick = () => setServes(serves+1);
+  renderIng();
+
+  $('#stepList').innerHTML = STEPS.map((s,i)=>`<li data-i="${i}" tabindex="0">${s}</li>`).join('');
+  $('#stepList').addEventListener('click', e => { const li=e.target.closest('li'); if(li) li.classList.toggle('done'); });
+  $('#stepList').addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' '){ e.preventDefault(); e.target.click(); } });
+
+  $$('.tabbar button').forEach(b => b.onclick = () => {
+    $$('.tabbar button').forEach(x=>x.classList.toggle('on', x===b));
+    $$('.panel').forEach(p=>p.classList.toggle('on', p.id==='p-'+b.dataset.tab));
+  });
+
+  /* ---------- cook mode ---------- */
+  let cur=0, secs=0, run=null, wl=null;
+  const tShow = () => { $('#tDisp').textContent = Math.floor(secs/60)+':'+String(secs%60).padStart(2,'0'); };
+  const tStop = () => { clearInterval(run); run=null; $('#tGo').textContent='Start'; };
+  const tStart = () => { if(!secs) return; $('#timer').classList.remove('ring'); $('#tGo').textContent='Pause';
+    run=setInterval(()=>{ secs--; tShow(); if(secs<=0){ tStop(); $('#timer').classList.add('ring'); toast('⏰ Time’s up!'); try{navigator.vibrate&&navigator.vibrate([200,100,200]);}catch(e){} } },1000); };
+  $('#tGo').onclick = () => run ? tStop() : tStart();
+  $('#tReset').onclick = () => { tStop(); secs=STEP_TIMER[cur]||0; $('#timer').classList.remove('ring'); tShow(); };
+  $$('#timer [data-add]').forEach(b => b.onclick = () => { secs+=+b.dataset.add; $('#timer').classList.remove('ring'); tShow(); });
+  const showStep = () => {
+    $('#cookN').textContent = `Step ${cur+1} of ${STEPS.length}`;
+    const p=$('#cookStep'); p.textContent = STEPS[cur]; p.style.animation='none'; void p.offsetWidth; p.style.animation='';
+    $('#cookBar').style.width = ((cur+1)/STEPS.length*100)+'%';
+    $('#prev').disabled = cur===0;
+    $('#next').textContent = cur===STEPS.length-1 ? 'Finish 🎉' : 'Next step →';
+    tStop(); secs = STEP_TIMER[cur]||0; $('#timer').classList.remove('ring'); tShow();
+  };
+  const isCook = () => $('#cook').classList.contains('open');
+  const openCook = () => { cur=0; showStep(); $('#cook').classList.add('open'); document.body.classList.add('lock'); $('#next').focus(); };
+  const closeCook = () => { tStop(); $('#cook').classList.remove('open'); document.body.classList.remove('lock'); if(wl){ wl.release().catch(()=>{}); wl=null; $('#wake').checked=false; } };
+  $('#cookBtn').onclick = openCook;
+  swipe($('#cook .cook-body'), () => $('#next').click(), () => $('#prev').click());
+  $('#cookClose').onclick = closeCook;
+  $('#prev').onclick = () => { if(cur>0){ cur--; showStep(); } };
+  $('#next').onclick = () => { if(cur<STEPS.length-1){ cur++; showStep(); } else { closeCook(); toast('Enjoy your dinner! 🍝'); } };
+  $('#wake').onchange = async e => {
+    if(e.target.checked){ try{ wl = await navigator.wakeLock.request('screen'); toast('Screen will stay on'); }catch(err){ e.target.checked=false; toast('Not supported on this device'); } }
+    else if(wl){ wl.release().catch(()=>{}); wl=null; }
+  };
+  document.addEventListener('keydown', e => {
+    if(!isCook()) return;
+    if(e.key==='Escape') closeCook(); if(e.key==='ArrowRight') $('#next').click(); if(e.key==='ArrowLeft') $('#prev').click();
+  });
+
+  /* ---------- save button + latest filters ---------- */
+  let activeFilter='all';
+  const applyFilter = f => {
+    activeFilter=f; let shown=0;
+    $$('#filters button').forEach(b=>b.classList.toggle('on', b.dataset.filter===f));
+    $$('#grid .card').forEach(c => { const ok = f==='all' || (f==='saved' ? favs.has(c.dataset.id) : c.dataset.cats.split(' ').includes(f));
+      c.classList.toggle('hide', !ok); if(ok){ shown++; c.classList.add('in'); } });
+    const em=$('#empty'); em.classList.toggle('show', shown===0);
+    em.querySelector('p').textContent = f==='saved' ? 'Tap the ♡ on any recipe to save it for later.' : 'New recipes in this category are on their way. Sign up below to hear first!';
+  };
+  const syncSave = () => { $('#saveRecipe').textContent = favs.has('pesto-pasta') ? '♥ Saved' : '♡ Save recipe'; if(activeFilter==='saved') applyFilter('saved'); };
+  $('#saveRecipe').onclick = () => toggleFav('pesto-pasta');
+  $$('#filters button').forEach(b => b.onclick = () => applyFilter(b.dataset.filter));
+  onFavs(syncSave); syncSave();
+
+  /* ---------- YouTube video (loads only when played) ---------- */
+  // Every .video-frame holds a poster button; pressing it swaps in the player.
+  // Only one player runs at a time, and the recipe-card player stops when you leave its tab.
+  const frames = $$('.video-frame');
+  const posters = new Map(frames.map(fr => [fr, fr.innerHTML]));
+  const stopVideo = fr => { if (fr.classList.contains('playing')) { fr.innerHTML = posters.get(fr); fr.classList.remove('playing'); bindPoster(fr); } };
+  // In the hosted preview the page sits inside a locked-down frame where YouTube refuses to play,
+  // so there we open the video on YouTube instead. On a normal website it plays right in the page.
+  const YT_URL = 'https://youtu.be/FvktW_5l0nY';
+  let framed = true; try { framed = window.self !== window.top; } catch (e) {}
+  const openOnYouTube = () => { const a = document.createElement('a'); a.href = YT_URL; a.target = '_blank'; a.rel = 'noopener'; document.body.appendChild(a); a.click(); a.remove(); };
+  if (framed) frames.forEach(fr => fr.querySelectorAll('.video-label small').forEach(s => s.textContent = 'Opens on YouTube ↗'));
+  document.addEventListener('securitypolicyviolation', e => {
+    if (/youtube/.test(e.blockedURI || '')) { frames.forEach(stopVideo); framed = true; openOnYouTube(); }
+  });
+  const playVideo = fr => {
+    if (framed) { openOnYouTube(); return; }
+    frames.forEach(o => { if (o !== fr) stopVideo(o); });
+    const f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/FvktW_5l0nY?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+    f.title = 'Can I Make Creamy Chicken Pesto Pasta in 30 Minutes?';
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    f.referrerPolicy = 'strict-origin-when-cross-origin';
+    f.allowFullscreen = true;
+    fr.replaceChildren(f); fr.classList.add('playing');
+  };
+  const bindPoster = fr => { const b = fr.querySelector('.video-poster'); if (b) b.onclick = () => playVideo(fr); };
+  frames.forEach(bindPoster);
+  $$('.tabbar button').forEach(b => b.addEventListener('click', () => { if (b.dataset.tab !== 'video') stopVideo($('.card-video')); }));
+  $$('.open-cook').forEach(a => a.onclick = e => { e.preventDefault(); $('#cookBtn').click(); });
+
+  /* ---------- hero carousel ---------- */
+  (() => {
+    const car = $('#carousel'); if (!car) return;
+    const slides = [...car.querySelectorAll('.slide')], dots = [...car.querySelectorAll('.car-dots button')];
+    const st = $('#carSticker');
+    const icon = p => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+    const INFO = [
+      {dot:'20', t:'Creamy Chicken Pesto Pasta', s:'New recipe · ready in 20 mins', href:'#recipe'},
+      {dot:icon('<path d="M4 11h16a8 8 0 0 1-16 0zM12 3v4M8 5v2M16 5v2"/>'), t:'Easy Family Dinners', s:'Weeknight wins the whole family will love', href:'recipes.html#dinners'},
+      {dot:icon('<circle cx="12" cy="12" r="8"/><circle cx="9.5" cy="10" r="1" fill="currentColor"/><circle cx="14" cy="9" r="1" fill="currentColor"/><circle cx="13" cy="14" r="1" fill="currentColor"/>'), t:'Baking', s:'Bakes and treats for the tin', href:'recipes.html#baking'},
+      {dot:icon('<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>'), t:'Hi, I’m Amy!', s:'Meet the cook behind the recipes', href:'about.html'}
+    ];
+    const MS = 3000;
+    car.style.setProperty('--car-ms', MS+'ms');
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let cur = 0, hover = false, userPaused = reduced, swapT;
+
+    const go = n => {
+      const prev = cur; cur = (n + slides.length) % slides.length;
+      slides.forEach((s,i) => { s.classList.toggle('on', i===cur); s.setAttribute('aria-hidden', i!==cur); });
+      dots.forEach((d,i) => { d.classList.toggle('on', i===cur); d.setAttribute('aria-selected', i===cur); const f=d.querySelector('i'); f.style.animation='none'; void f.offsetWidth; f.style.animation=''; });
+      if (prev !== cur || !st.dataset.ready) {
+        st.dataset.ready = 1; st.classList.add('swap'); clearTimeout(swapT);
+        swapT = setTimeout(() => { const d=INFO[cur]; st.href=d.href; st.querySelector('.dot').innerHTML=d.dot; st.querySelector('.st-txt').innerHTML=`<b>${d.t}</b>${d.s}`; st.classList.remove('swap'); }, 280);
+      }
+    };
+    const sync = () => {
+      const paused = userPaused || hover || document.hidden;
+      car.classList.toggle('paused', paused);
+      car.classList.toggle('static', userPaused);
+      car.classList.toggle('user-paused', userPaused && !reduced);
+      const pb = car.querySelector('.car-pause');
+      pb.setAttribute('aria-label', userPaused ? 'Play slideshow' : 'Pause slideshow');
+      pb.innerHTML = userPaused
+        ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l12-7z"/></svg>'
+        : '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+    };
+    // the active dot's fill animation is the timer: when it finishes, advance
+    dots.forEach(d => d.querySelector('i').addEventListener('animationend', () => { if (!userPaused) go(cur+1); }));
+    dots.forEach((d,i) => d.onclick = e => { e.preventDefault(); go(i); });
+    car.querySelector('.prev').onclick = () => go(cur-1);
+    car.querySelector('.next').onclick = () => go(cur+1);
+    car.querySelector('.car-pause').onclick = () => { userPaused = !userPaused; sync(); };
+    car.addEventListener('mouseenter', () => { hover = true; sync(); });
+    car.addEventListener('mouseleave', () => { hover = false; sync(); });
+    car.addEventListener('keydown', e => { if (e.key==='ArrowRight') go(cur+1); if (e.key==='ArrowLeft') go(cur-1); });
+    document.addEventListener('visibilitychange', sync);
+    swipe(car.querySelector('.frame'), () => go(cur+1), () => go(cur-1));
+    go(0); sync();
+  })();
+
+  /* ---------- mood picker ---------- */
+  const MOODS = {
+    quick:'Try my <a href="#recipe">Creamy Chicken Pesto Pasta</a>. It’s on the table in 20 minutes.',
+    comfort:'Nothing beats a creamy pasta bake. Try the <a href="#recipe">Creamy Chicken Pesto Pasta</a> with the bubbling cheese topping.',
+    sweet:'Baking recipes are coming soon. <a href="#newsletter">Sign up</a> to be the first to know!',
+    lunch:'Lunchbox ideas are coming soon. <a href="#newsletter">Sign up</a> to be the first to know!'
+  };
+  $$('#moodPills .pill').forEach(p => p.onclick = () => {
+    $$('#moodPills .pill').forEach(x=>x.classList.toggle('on',x===p));
+    const o=$('#moodOut'); o.innerHTML=MOODS[p.dataset.mood]; o.classList.add('show');
+  });
+})();
+</script>
+</body>
+</html>
+
+</body></html>

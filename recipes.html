@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbf7ef">
+<title>Recipes · Amy Louise Crisp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="recipes">
+
+<header id="hdr">
+  <div class="wrap head">
+    <a href="index.html" class="brand"><span class="name">Amy Louise Crisp</span><span class="tag">Family recipes you'll actually make</span></a>
+    <nav id="nav">
+      <ul>
+        <li><a href="index.html" data-nav="home">Home</a></li>
+        <li><a href="recipes.html" data-nav="recipes">Recipes</a></li>
+        <li><a href="recipes.html#30" data-nav="recipes">30 Minute Meals</a></li>
+        <li><a href="recipes.html#lunch" data-nav="recipes">Lunchbox Line Up</a></li>
+        <li><a href="recipes.html#slow" data-nav="recipes">Slow Cooker Stash</a></li>
+        <li><a href="about.html" data-nav="about">About Me</a></li>
+      </ul>
+    </nav>
+    <div class="icons">
+      <button class="icon-btn" id="favBtn" aria-label="Saved recipes" title="Saved recipes"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span class="count" id="favCount">0</span></button>
+      <button class="icon-btn" id="searchBtn" aria-label="Search" title="Search ( / )"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="page-hero">
+    <div class="wrap">
+      <div class="crumbs"><a href="index.html">Home</a> / <span id="crumb">Recipes</span></div>
+      <h1 id="pageTitle">All Recipes</h1>
+      <p id="pageSub">Simple, family‑friendly recipes you’ll actually want to make again and again. Search, filter by category or save your favourites for later.</p>
+    </div>
+  </div>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="toolbar">
+        <label class="find"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sage-d)" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="find" placeholder="Search by name or ingredient…" aria-label="Search recipes"></label>
+        <select id="sort" aria-label="Sort recipes">
+          <option value="new">Newest first</option>
+          <option value="quick">Quickest first</option>
+          <option value="az">A–Z</option>
+        </select>
+        <div class="view-toggle" role="group" aria-label="View">
+          <button class="on" data-view="grid" aria-label="Grid view"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg></button>
+          <button data-view="list" aria-label="List view"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="4" width="18" height="4" rx="1.5"/><rect x="3" y="10" width="18" height="4" rx="1.5"/><rect x="3" y="16" width="18" height="4" rx="1.5"/></svg></button>
+        </div>
+      </div>
+
+      <div class="filters" id="filters">
+        <button data-filter="all">All</button>
+        <button data-filter="dinners">Easy Family Dinners</button>
+        <button data-filter="30">30 Minute Meals</button>
+        <button data-filter="slow">Slow Cooker Stash</button>
+        <button data-filter="lunch">Lunchbox Line Up</button>
+        <button data-filter="baking">Baking</button>
+        <button data-filter="saved">♥ Saved</button>
+      </div>
+
+      <div class="cat-intro" id="catIntro"><div class="th"><img id="ciImg" src="img/sq-7-1.jpg" alt=""></div><div><h3 id="ciTitle"></h3><p id="ciText"></p></div></div>
+      <p class="result-count" id="count" aria-live="polite"></p>
+
+      <div class="grid" id="grid"></div>
+      <div class="empty" id="empty"><b class="serif" style="font-size:22px">Nothing here yet</b><p style="margin:6px 0 12px" id="emptyText"></p><button class="btn" id="clearBtn">Show all recipes</button></div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head reveal"><div><span class="eyebrow">Explore</span><h2>Browse by Category</h2></div></div>
+      <div class="cat-strip" id="catStrip"></div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter">
+    <div class="wrap">
+      <div class="news reveal">
+        <div>
+          <h2>New recipes, straight to your inbox</h2>
+          <p>Be the first to get my latest family dinners, bakes and lunchbox ideas. Easy to follow and made with everyday ingredients.</p>
+        </div>
+        <div id="newsWrap">
+          <form id="newsForm" novalidate>
+            <input type="email" id="email" placeholder="Your email address" aria-label="Email address">
+            <button class="btn" type="submit">Sign me up</button>
+            <div class="opts" aria-label="I'd love recipes for">
+              <label><input type="checkbox" checked> Dinners</label>
+              <label><input type="checkbox"> Baking</label>
+              <label><input type="checkbox"> Lunchboxes</label>
+            </div>
+            <div class="err" id="err" role="alert"></div>
+          </form>
+          <small>No spam, just recipes. Unsubscribe anytime.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="index.html" class="brand"><span class="name">Amy Louise Crisp</span><span class="tag">Family recipes you'll actually make</span></a>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3c-2.8 0-4 1.8-4 4.5V11H7v4h3v7h4v-7h3l1-4h-4V8.6c0-.4.3-.6.6-.6z"/></svg></a>
+          <a href="#" aria-label="Pinterest"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.2-2 0-2.9l1.2-5s-.3-.6-.3-1.5c0-1.4.8-2.4 1.8-2.4.9 0 1.3.6 1.3 1.4 0 .9-.5 2.1-.8 3.3-.2 1 .5 1.8 1.5 1.8 1.8 0 3.1-1.9 3.1-4.6 0-2.4-1.7-4.1-4.2-4.1-2.9 0-4.5 2.1-4.5 4.4 0 .9.3 1.8.8 2.3l.1.4-.3 1.1c0 .2-.2.3-.4.2-1.3-.6-2.1-2.5-2.1-4C5.6 8.2 8 5 12.6 5c3.7 0 6.5 2.6 6.5 6.2 0 3.7-2.3 6.6-5.5 6.6-1.1 0-2.1-.6-2.4-1.2l-.7 2.5c-.2.9-.9 2.1-1.3 2.8A10 10 0 1 0 12 2z"/></svg></a>
+        </div>
+      </div>
+      <div><h4>Recipes</h4><ul><li><a href="recipes.html#dinners">Easy Family Dinners</a></li><li><a href="recipes.html#30">30 Minute Meals</a></li><li><a href="recipes.html#slow">Slow Cooker Stash</a></li><li><a href="recipes.html#lunch">Lunchbox Line Up</a></li><li><a href="recipes.html#baking">Baking</a></li></ul></div>
+      <div><h4>More</h4><ul><li><a href="about.html">About Me</a></li><li><a href="about.html#contact">Contact</a></li><li><a href="#newsletter">Newsletter</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
+    </div>
+    <div class="legal">© 2026 Amy Louise Crisp</div>
+  </div>
+</footer>
+
+<script src="site.js"></script>
+<script>
+(() => {
+  const { $, $$, favs, onFavs, esc } = window.ALC;
+  const CATS = {
+    all:{t:'All Recipes', d:'Simple, family‑friendly recipes you’ll actually want to make again and again. Search, filter by category or save your favourites for later.'},
+    dinners:{t:'Easy Family Dinners', d:'Weeknight wins the whole family will love. Simple ingredients, minimal fuss.', img:'img/sq-7-1.jpg'},
+    '30':{t:'30 Minute Meals', d:'On the table in half an hour or less, for those nights when time is tight.', img:'img/pasta.jpg'},
+    slow:{t:'Slow Cooker Stash', d:'Pop it on in the morning and come home to dinner that’s ready and waiting.', img:'img/sq-33-1.jpg'},
+    lunch:{t:'Lunchbox Line Up', d:'Packed lunch ideas the kids will actually eat, plus a few for the grown‑ups too.', img:'img/hero.jpg'},
+    baking:{t:'Baking', d:'Bakes, treats and something for the tin. Easy enough to make with the kids.', img:'img/sq-21.jpg'},
+    saved:{t:'Saved Recipes', d:'Your favourites, all in one place. Tap the ♡ on any recipe to add it here.'}
+  };
+  const RECIPES = [
+    {id:'pesto-pasta', t:'Creamy Chicken Pesto Pasta', cats:['dinners','30'], mins:20, serves:4, date:5, img:'img/pasta.jpg', pos:'30% 50%', href:'index.html#recipe', isNew:true,
+     d:'A creamy chicken pesto pasta with a homemade sauce, ready in just 20 minutes. Perfect for an easy family dinner!', k:'chicken mushrooms pesto mozzarella parmesan pasta onion milk'},
+    {id:'slow-1', t:'Your next slow cooker recipe', cats:['slow'], mins:480, date:4, soon:true, d:'Example placeholder. Amy’s next Slow Cooker Stash recipe will appear here.', k:''},
+    {id:'lunch-1', t:'Your next lunchbox idea', cats:['lunch'], mins:15, date:3, soon:true, d:'Example placeholder. Amy’s next Lunchbox Line Up idea will appear here.', k:''},
+    {id:'bake-1', t:'Your next bake', cats:['baking'], mins:60, date:2, soon:true, d:'Example placeholder. Amy’s next bake will appear here.', k:''},
+    {id:'dinner-2', t:'Another family favourite', cats:['dinners'], mins:30, date:1, soon:true, d:'Example placeholder. More Easy Family Dinners are on the way.', k:''}
+  ];
+  const LABEL = {dinners:'Easy Family Dinners','30':'30 Minute Meals',slow:'Slow Cooker Stash',lunch:'Lunchbox Line Up',baking:'Baking'};
+  const heart = '<svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>';
+  const time = m => m>=60 ? (m%60 ? `${Math.floor(m/60)} hr ${m%60} mins` : `${m/60} hr${m>=120?'s':''}`) : `${m} mins`;
+
+  let filter='all', q='', sort='new', view='grid';
+  try{ view = localStorage.getItem('alc-view') || 'grid'; }catch(e){}
+
+  const render = () => {
+    const c = CATS[filter] || CATS.all;
+    $('#pageTitle').textContent = c.t; $('#crumb').textContent = filter==='all' ? 'Recipes' : c.t;
+    $('#pageSub').textContent = c.d; document.title = c.t + ' · Amy Louise Crisp';
+    $$('#filters button').forEach(b => b.classList.toggle('on', b.dataset.filter===filter));
+    $$('[data-nav]').forEach(a => a.classList.toggle('on', a.dataset.nav==='recipes' && (a.getAttribute('href')==='recipes.html#'+filter || (filter==='all' && a.getAttribute('href')==='recipes.html'))));
+    $$('.tabbar-m [data-tab]').forEach(t => t.classList.toggle('on', t.dataset.tab === (filter==='saved' ? 'saved' : 'recipes')));
+    const ci = $('#catIntro'); ci.classList.toggle('show', !!c.img);
+    if (c.img){ $('#ciImg').src=c.img; $('#ciTitle').textContent=c.t; $('#ciText').textContent=c.d; }
+
+    const ql = q.toLowerCase();
+    let list = RECIPES.filter(r => (filter==='all' || (filter==='saved' ? favs.has(r.id) : r.cats.includes(filter)))
+      && (!ql || (r.t+' '+r.k+' '+r.cats.map(x=>LABEL[x]).join(' ')).toLowerCase().includes(ql)));
+    list.sort(sort==='quick' ? (a,b)=>a.mins-b.mins : sort==='az' ? (a,b)=>a.t.localeCompare(b.t) : (a,b)=>b.date-a.date);
+
+    const grid = $('#grid'); grid.classList.toggle('list', view==='list');
+    grid.innerHTML = list.map(r => `
+      <div class="card in" data-id="${r.id}">
+        <button class="heart${favs.has(r.id)?' on':''}" aria-label="Save ${esc(r.t)}">${heart}</button>
+        <a href="${r.href||'#'}">
+          <div class="ph${r.soon?' soon':''}">${r.soon?'Coming soon':`<img src="${r.img}" alt="${esc(r.t)}" style="object-position:${r.pos||'50% 50%'}">`}${r.isNew?'<span class="badge">New</span>':''}</div>
+          <span class="label">${LABEL[r.cats[0]]}</span>
+          <h3>${esc(r.t)}</h3>
+          <span class="meta">${r.soon?'Example placeholder':time(r.mins)+(r.serves?' · Serves '+r.serves:'')}</span>
+          <span class="desc">${esc(r.d)}</span>
+          ${view==='list' && !r.soon ? `<span class="tags">${r.cats.map(x=>`<span>${LABEL[x]}</span>`).join('')}</span>`:''}
+        </a>
+      </div>`).join('');
+    const real = list.filter(r=>!r.soon).length;
+    $('#count').innerHTML = list.length ? `Showing <b>${real}</b> recipe${real===1?'':'s'}${list.length>real?` and ${list.length-real} coming soon`:''}${q?` for “${esc(q)}”`:''}` : '';
+    $('#empty').classList.toggle('show', !list.length);
+    $('#emptyText').textContent = filter==='saved' && !q ? 'Tap the ♡ on any recipe to save it for later.' : q ? `No recipes match “${q}” yet. Amy’s adding new ones all the time!` : 'New recipes in this category are on their way.';
+    $$('.view-toggle button').forEach(b => b.classList.toggle('on', b.dataset.view===view));
+  };
+
+  const fromHash = () => { const h = decodeURIComponent(location.hash.slice(1)); filter = CATS[h] ? h : 'all'; render(); };
+  $$('#filters button').forEach(b => b.onclick = () => { history.replaceState(null,'', b.dataset.filter==='all' ? 'recipes.html' : '#'+b.dataset.filter); filter=b.dataset.filter; render(); });
+  let deb; $('#find').oninput = e => { clearTimeout(deb); deb=setTimeout(()=>{ q=e.target.value.trim(); render(); },120); };
+  $('#sort').onchange = e => { sort=e.target.value; render(); };
+  $$('.view-toggle button').forEach(b => b.onclick = () => { view=b.dataset.view; try{localStorage.setItem('alc-view',view);}catch(e){} render(); });
+  $('#clearBtn').onclick = () => { q=''; $('#find').value=''; filter='all'; history.replaceState(null,'','recipes.html'); render(); };
+  addEventListener('hashchange', fromHash);
+  onFavs(() => { if(filter==='saved') render(); });
+
+  $('#catStrip').innerHTML = Object.entries(CATS).filter(([k,c])=>c.img).map(([k,c]) => {
+    const n = RECIPES.filter(r=>!r.soon && r.cats.includes(k)).length;
+    return `<a href="#${k}" class="reveal"><span class="th"><img src="${c.img}" alt=""></span><span><b>${c.t}</b><small>${n ? n+' recipe'+(n>1?'s':'') : 'Coming soon'}</small></span></a>`;
+  }).join('');
+  $$('#catStrip a').forEach(a => a.addEventListener('click', () => scrollTo({top:0})));
+  window.ALC.reveal();
+  fromHash();
+})();
+</script>
+</body>
+</html>
