@@ -113,7 +113,8 @@
   reveal();
 
   /* favourites */
-  const favs = new Set(store.get('alc-favs', []));
+  const savedFavs = store.get('alc-favs', []);
+  const favs = new Set(Array.isArray(savedFavs) ? savedFavs.filter(x => typeof x === 'string') : []);
   const listeners = [];
   const syncFavs = () => {
     $$('[data-id] .heart').forEach(h => h.classList.toggle('on', favs.has(h.closest('[data-id]').dataset.id)));

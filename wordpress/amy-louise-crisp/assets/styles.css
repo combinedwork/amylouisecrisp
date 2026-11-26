@@ -1012,7 +1012,7 @@ nav#nav a{white-space:nowrap}
 }
 
 /* ---------- tablet landscape & small laptops: menu moves into the slide-in drawer ---------- */
-@media (min-width:901px) and (max-width:1100px){
+@media (min-width:901px) and (max-width:1180px){
   nav#nav{display:none}
   .menu-btn{display:grid}
   .head{gap:12px}
@@ -1116,3 +1116,19 @@ nav#nav a{white-space:nowrap}
 
 /* footer legal links: easy to tap */
 .legal a{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;color:inherit;text-decoration:underline;text-underline-offset:3px}
+
+/* recipe tabs never wider than the screen (4 tabs on the smallest phones) */
+.tabbar{overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabbar::-webkit-scrollbar{display:none}
+.tabbar button{flex:1 0 auto}
+@media (max-width:380px){
+  .tabbar{margin-left:-16px;margin-right:-16px;padding:0 16px;gap:0}
+  .tabbar button{min-width:0;padding:10px 7px;font-size:14px;letter-spacing:.02em}
+}
+/* the cookie banner always fits on screen (e.g. phones turned sideways) */
+.consent-card{max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow-y:auto;overscroll-behavior:contain}
+@media (max-width:900px){ .consent-card{max-height:calc(100dvh - 90px - env(safe-area-inset-bottom))} }
+@media (max-height:520px){ .consent-card{padding:14px 16px 12px} .consent-title{font-size:17px} .consent p{font-size:14px;margin-bottom:10px} .consent-actions .btn{min-height:44px} }
+/* use the short "Tips" label whenever the tab row itself is narrow (any screen) */
+.tabbar{container-type:inline-size}
+@container (max-width:540px){ .tabbar .t-full{display:none} .tabbar .t-short{display:inline} }

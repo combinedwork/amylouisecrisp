@@ -8,6 +8,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/** WordPress stores titles and names HTML-encoded (&amp;, &#8217;); turn them back into plain text. */
+function alc_plain( $s ) {
+	return trim( wp_strip_all_tags( html_entity_decode( (string) $s, ENT_QUOTES | ENT_HTML5, 'UTF-8' ) ) );
+}
+
 function alc_recipe_data( $post, $full = true ) {
 	$post    = get_post( $post );
 	$meta    = function ( $k ) use ( $post ) {
@@ -43,12 +48,12 @@ function alc_recipe_data( $post, $full = true ) {
 	$data = array(
 		'slug'        => $post->post_name,
 		'url'         => get_permalink( $post ),
-		'title'       => get_the_title( $post ),
+		'title'       => alc_plain( get_the_title( $post ) ),
 		'categories'  => array_values( $cats ),
 		'isNew'       => '1' === $meta( 'alc_new' ),
 		'image'       => $img ? $img : '',
 		'imagePos'    => '50% 50%',
-		'summary'     => $summary ? $summary : '',
+		'summary'     => $summary ? alc_plain( $summary ) : '',
 		'prep'        => (int) $meta( 'alc_prep' ),
 		'cook'        => (int) $meta( 'alc_cook' ),
 		'serves'      => max( 1, (int) ( $meta( 'alc_serves' ) ? $meta( 'alc_serves' ) : 4 ) ),
@@ -56,7 +61,7 @@ function alc_recipe_data( $post, $full = true ) {
 		'method'      => $method['steps'],
 		'timers'      => $method['timers'],
 		'tips'        => alc_parse_tips( $meta( 'alc_tips' ) ),
-		'video'       => $yt ? array( 'youtube' => $yt, 'title' => $meta( 'alc_video_title' ) ? $meta( 'alc_video_title' ) : get_the_title( $post ) ) : null,
+		'video'       => $yt ? array( 'youtube' => $yt, 'title' => $meta( 'alc_video_title' ) ? alc_plain( $meta( 'alc_video_title' ) ) : alc_plain( get_the_title( $post ) ) ) : null,
 		'keywords'    => (string) $meta( 'alc_keywords' ),
 	);
 	if ( ! $full ) {
@@ -96,11 +101,11 @@ function alc_collections_data() {
 		$img   = (int) get_term_meta( $t->term_id, 'alc_image', true );
 		$out[] = array(
 			'slug'     => $t->slug,
-			'name'     => $t->name,
+			'name'     => alc_plain( $t->name ),
 			'group'    => 'seasonal' === $group ? 'more' : $group,
 			'seasonal' => 'seasonal' === $group,
 			'image'    => $img ? wp_get_attachment_image_url( $img, 'large' ) : null,
-			'blurb'    => $t->description,
+			'blurb'    => alc_plain( $t->description ),
 		);
 	}
 	return $out;
@@ -142,7 +147,7 @@ add_action( 'wp_head', function () {
 		'@type'              => 'Recipe',
 		'name'               => $r['title'],
 		'description'        => $r['summary'],
-		'author'             => array( '@type' => 'Person', 'name' => get_bloginfo( 'name' ) ),
+		'author'             => array( '@type' => 'Person', 'name' => alc_plain( get_bloginfo( 'name' ) ) ),
 		'datePublished'      => get_the_date( 'c' ),
 		'prepTime'           => 'PT' . $r['prep'] . 'M',
 		'cookTime'           => 'PT' . $r['cook'] . 'M',
@@ -150,7 +155,7 @@ add_action( 'wp_head', function () {
 		'recipeYield'        => (string) $r['serves'],
 		'recipeCategory'     => array_values( array_filter( array_map( function ( $s ) {
 			$t = get_term_by( 'slug', $s, 'recipe_collection' );
-			return $t ? $t->name : '';
+			return $t ? alc_plain( $t->name ) : '';
 		}, $r['categories'] ) ) ),
 		'recipeIngredient'   => array(),
 		'recipeInstructions' => array(),

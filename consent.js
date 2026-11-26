@@ -50,9 +50,13 @@
   };
 
   const save = prefs => {
+    const before = state;
     state = Object.assign({ v: C.version, ts: new Date().toISOString() }, prefs);
+    // Something that was allowed is now switched off: reload so it stops straight away
+    const withdrawn = before && C.categories.some(c => before[c] && !state[c]);
     write(state);
     close();
+    if (withdrawn && document.querySelector('template[data-consent][data-done]')) { location.reload(); return; }
     run();
   };
   const all = on => C.categories.reduce((o, c) => (o[c] = on, o), {});
@@ -114,6 +118,8 @@
     get: () => state
   };
 
-  const start = () => { run(); if (C.enabled && !state) open(false); };
+  // Ask again if the site has started using a kind of cookie this visitor hasn't been asked about
+  const unanswered = () => !state || C.categories.some(c => !(c in state));
+  const start = () => { run(); if (C.enabled && unanswered()) open(false); };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();

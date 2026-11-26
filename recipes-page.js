@@ -8,7 +8,7 @@
     D.categories.map(c => `<button data-filter="${c.slug}">${esc(c.name)}</button>`).join('') + `<button data-filter="saved">♥ Saved</button>`;
 
   let filter = 'all', q = '', sort = 'new', view = 'grid';
-  try { view = localStorage.getItem('alc-view') || 'grid'; } catch (e) {}
+  try { view = localStorage.getItem('alc-view') === 'list' ? 'list' : 'grid'; } catch (e) {}
 
   const render = () => {
     const c = info(filter), seasonal = c.seasonal;
@@ -42,11 +42,11 @@
   };
 
   const fromHash = () => { const h = decodeURIComponent(location.hash.slice(1)); filter = h === 'saved' || cat(h) ? h : 'all'; render(); };
-  $$('#filters button').forEach(b => b.onclick = () => { history.replaceState(null, '', b.dataset.filter === 'all' ? 'recipes.html' : '#' + b.dataset.filter); filter = b.dataset.filter; render(); });
+  $$('#filters button').forEach(b => b.onclick = () => { history.replaceState(null, '', b.dataset.filter === 'all' ? location.pathname + location.search : '#' + b.dataset.filter); filter = b.dataset.filter; render(); });
   let deb; $('#find').oninput = e => { clearTimeout(deb); deb = setTimeout(() => { q = e.target.value.trim(); render(); }, 120); };
   $('#sort').onchange = e => { sort = e.target.value; render(); };
   $$('.view-toggle button').forEach(b => b.onclick = () => { view = b.dataset.view; try { localStorage.setItem('alc-view', view); } catch (e) {} render(); });
-  $('#clearBtn').onclick = () => { q = ''; $('#find').value = ''; filter = 'all'; history.replaceState(null, '', 'recipes.html'); render(); };
+  $('#clearBtn').onclick = () => { q = ''; $('#find').value = ''; filter = 'all'; history.replaceState(null, '', location.pathname + location.search); render(); };
   addEventListener('hashchange', fromHash);
   onFavs(() => { if (filter === 'saved') render(); });
   $$('[data-cat-strip] a').forEach(a => a.addEventListener('click', () => scrollTo({ top: 0 })));

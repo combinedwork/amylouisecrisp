@@ -118,7 +118,7 @@
     $('#timer').classList.toggle('has-preset', !!stepTimer(cur));
   };
   const isCook = () => $('#cook').classList.contains('open');
-  const openCook = (recipe, serves) => { R = recipe; steps = recipe.method; servesNow = serves || recipe.serves; cur = 0;
+  const openCook = (recipe, serves) => { if (!recipe.method || !recipe.method.length) return; R = recipe; steps = recipe.method; servesNow = serves || recipe.serves; cur = 0;
     $('#cookTitle').textContent = recipe.title; mapIngredients(); tStop(); secs = 0; showStep();
     $('#cook').classList.add('open'); document.body.classList.add('lock'); $('#next').focus(); };
   const closeCook = () => { tStop(); $('#cook').classList.remove('open'); document.body.classList.remove('lock');
@@ -154,7 +154,7 @@
     <div class="wrap rec">
       <div class="ph reveal">${r.image ? `<img src="${esc(r.image)}" alt="${esc(r.title)}" style="object-position:${r.imagePos || '50% 50%'}">` : `<span class="festive-art plain" aria-hidden="true">${esc(r.title.charAt(0))}</span>`}</div>
       <div class="reveal">
-        <span class="eyebrow">${esc(opts.eyebrow || cats.map(c => c.name).join(' · '))}</span>
+        ${(opts.eyebrow || cats.length) ? `<span class="eyebrow">${esc(opts.eyebrow || cats.map(c => c.name).join(' · '))}</span>` : ''}
         <${H}>${esc(r.title)}</${H}>
         <p class="intro">${esc(r.summary)}</p>
         <div class="facts">
@@ -164,7 +164,7 @@
           <div><small>Serves</small><span class="stepper"><button data-s="-1" aria-label="Fewer servings">−</button><b class="serves">${r.serves}</b><button data-s="1" aria-label="More servings">+</button></span></div>
         </div>
         <div class="actions">
-          <button class="btn dark cook-btn">${play(18)}Start Cook Mode</button>
+          ${r.method.length ? `<button class="btn dark cook-btn">${play(18)}Start Cook Mode</button>` : ''}
           <button class="btn line save-btn">♡ Save recipe</button>
           <button class="btn line" onclick="window.print()">Print</button>
         </div>
@@ -176,8 +176,9 @@
         </div>
         <div class="panel on" data-panel="ing"><div class="ing-list"></div><div class="progress-note ing-note"></div></div>
         <div class="panel" data-panel="method">
+          ${r.method.length ? '' : '<p class="progress-note">The method is coming soon.</p>'}
           <ol class="steps">${r.method.map((s, i) => `<li tabindex="0"><span>${esc(s)}${(r.timers || {})[i + 1] ? `<span class="step-timer">⏱ ${timerLabel(r.timers[i + 1])} timer in Cook Mode</span>` : ''}</span></li>`).join('')}</ol>
-          <div class="progress-note">Tap a step to mark it done, or use <a href="#" class="open-cook">Cook Mode</a> to follow one step at a time.</div>
+          ${r.method.length ? '<div class="progress-note">Tap a step to mark it done, or use <a href="#" class="open-cook">Cook Mode</a> to follow one step at a time.</div>' : ''}
         </div>
         ${r.video ? `<div class="panel" data-panel="video">
           <div class="video-frame card-video" data-yt="${r.video.youtube}" data-title="${esc(r.video.title)}">${posterHTML(r.video, r.image, r.imagePos, 'Watch me make it', 'See every step in action', 26)}</div>
@@ -190,7 +191,7 @@
     let serves = r.serves; const checked = new Set();
     const TOTAL = r.ingredients.reduce((a, g) => a + g.items.length, 0);
     const q = s => host.querySelector(s), qa = s => [...host.querySelectorAll(s)];
-    const note = () => { const n = checked.size; q('.ing-note').textContent = n === 0 ? 'Tick things off as you gather them.' : n === TOTAL ? 'Everything’s ready. Time to cook! 🎉' : `${n} of ${TOTAL} gathered`; };
+    const note = () => { const n = checked.size; q('.ing-note').textContent = !TOTAL ? 'The ingredients are coming soon.' : n === 0 ? 'Tick things off as you gather them.' : n === TOTAL ? 'Everything’s ready. Time to cook! 🎉' : `${n} of ${TOTAL} gathered`; };
     const renderIng = () => { let h = '', i = 0;
       r.ingredients.forEach(g => { h += `<div class="ing-group">${esc(g.group)}</div><ul class="ing">`;
         g.items.forEach(([qq, u, n]) => { const id = i++; h += `<li><label><input type="checkbox" data-i="${id}" ${checked.has(id) ? 'checked' : ''}><span><span class="amt">${esc(amount(qq, u, serves, r.serves))}</span>${esc(n)}</span></label></li>`; });
@@ -207,7 +208,7 @@
       qa('.panel').forEach(p => p.classList.toggle('on', p.dataset.panel === b.dataset.tab));
       if (b.dataset.tab !== 'video') { const cv = q('.card-video'); if (cv) stopVideo(cv); }
     });
-    q('.cook-btn').onclick = () => openCook(r, serves);
+    if (q('.cook-btn')) q('.cook-btn').onclick = () => openCook(r, serves);
     qa('.open-cook').forEach(a => a.onclick = e => { e.preventDefault(); openCook(r, serves); });
     const sb = q('.save-btn'); const syncSave = () => { sb.textContent = favs.has(r.slug) ? '♥ Saved' : '♡ Save recipe'; };
     sb.onclick = () => toggleFav(r.slug); onFavs(syncSave); syncSave();
