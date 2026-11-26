@@ -3,7 +3,7 @@
 # Run from the repository root:  bash wordpress/build.sh
 set -euo pipefail
 cd "$(dirname "$0")/.."
-for f in styles.css site.js recipe-card.js home.js recipes-page.js recipe-page.js; do
+for f in styles.css site.js consent.js recipe-card.js home.js recipes-page.js recipe-page.js; do
   cp "$f" wordpress/amy-louise-crisp/assets/
 done
 mkdir -p wordpress/dist

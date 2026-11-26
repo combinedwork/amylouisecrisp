@@ -156,6 +156,12 @@ function alc_theme_setup_content() {
 		}
 	}
 
+	// Privacy & Cookie Policy (published, so the footer menu below can link to it)
+	if ( function_exists( 'alc_setup_privacy_page' ) ) {
+		alc_setup_privacy_page();
+		update_option( 'alc_privacy_setup', 1 );
+	}
+
 	// Menus
 	$locations = get_theme_mod( 'nav_menu_locations', array() );
 	if ( empty( $locations['primary'] ) ) {

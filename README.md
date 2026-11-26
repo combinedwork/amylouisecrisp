@@ -27,6 +27,7 @@ This repository has two things:
 - [Newsletter sign-up](#newsletter-sign-up)
 - [Logo, site name, The Seasons font and social links](#logo-site-name-the-seasons-font-and-social-links)
 - [Advertising (for later)](#advertising-for-later)
+- [Privacy policy and cookie banner](#privacy-policy-and-cookie-banner)
 - [If something goes wrong](#if-something-goes-wrong)
 - [For developers](#for-developers)
 
@@ -229,6 +230,35 @@ update your **Privacy Policy** page (**Settings → Privacy**).
 
 ---
 
+## Privacy policy and cookie banner
+
+The site follows UK rules (UK GDPR and the ICO’s cookie guidance):
+
+- **Cookie banner:** first-time visitors see a small banner with equally easy **Accept all** and
+  **Reject all** buttons, plus **Choose** to pick categories (visitor statistics, advertising,
+  videos). Nothing optional loads until they agree, and their choice is remembered.
+- **Cookie settings** link in the footer lets visitors change their mind any time.
+- **YouTube videos** ask “Allow and play?” first if the visitor hasn’t allowed videos.
+- Saved recipes and view settings stay on the visitor’s own device and are never sent anywhere.
+
+**Changing the banner, adding Google Analytics:** **Appearance → Customise → 🍪 Privacy & cookies**.
+Paste your Google Analytics code into *Visitor statistics code* and it only runs for visitors who
+allow statistics. If your ad network shows its own consent banner, tick
+*My ad network shows its own consent banner*.
+
+**Privacy & Cookie Policy page:** created automatically when the theme is set up (it becomes your
+official WordPress privacy page, linked in the footer). It’s a normal page in **Pages**, with your
+site name and admin email filled in. **Please read it through** and keep it up to date, for example:
+
+- name your newsletter provider (e.g. MailerLite) once you choose one
+- name your ad partner when adverts start
+- add anything new you start using (e.g. a contact form plugin or comments)
+
+This policy is a sensible starting point written for this site, but it isn’t legal advice. If in
+doubt, the ICO website (ico.org.uk) has free guidance for small businesses.
+
+---
+
 ## If something goes wrong
 
 - **Undo a change to a recipe or page:** open it and click **Revisions** on the right to go back to an
@@ -252,6 +282,8 @@ home.js                  Homepage: categories, collections, mood picker, latest 
 recipes-page.js          Recipes page: filters, search, sort, list/grid
 recipe-page.js           Single recipe page
 about.js                 Mock-up About page (gallery lightbox, contact form)
+consent.js               Cookie banner; holds back <template data-consent> code until allowed
+privacy.html             Mock-up Privacy & Cookie Policy (built by wordpress/privacy-source.py)
 wordpress/amy-recipes/        The plugin (recipe post type, collections, form, parser, settings, guide)
 wordpress/amy-louise-crisp/   The theme (templates, Customiser, first-run setup)
 wordpress/build.sh            Copies the shared files into the theme and builds wordpress/dist/*.zip

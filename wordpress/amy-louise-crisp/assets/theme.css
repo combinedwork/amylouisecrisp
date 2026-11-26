@@ -62,3 +62,11 @@ nav#nav .current-menu-item>a,nav#nav .current_page_item>a{border-color:var(--pin
   .entry-content .wp-block-image.is-style-rounded{max-width:none}
   .entry-content .wp-block-gallery.has-nested-images{grid-template-columns:repeat(4,1fr)}
 }
+
+/* tables in pages (e.g. the cookie table on the Privacy & Cookie Policy) */
+.entry-content .wp-block-table{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0 24px}
+.entry-content .wp-block-table table{width:100%;border-collapse:collapse;font-size:15px;background:var(--surface)}
+.entry-content .wp-block-table th,.entry-content .wp-block-table td{text-align:left;padding:10px 12px;border:0;border-bottom:1px solid var(--line);vertical-align:top}
+.entry-content .wp-block-table thead{border:0}
+.entry-content .wp-block-table th{background:var(--oat);font-family:var(--caps);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.entry-content h3{margin-top:28px}

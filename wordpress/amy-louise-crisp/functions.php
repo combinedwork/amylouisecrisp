@@ -13,6 +13,7 @@ define( 'ALC_THEME_VERSION', '1.0.0' );
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/setup.php';
 require get_template_directory() . '/inc/ads.php';
+require get_template_directory() . '/inc/consent.php';
 
 add_action( 'after_setup_theme', function () {
 	add_theme_support( 'title-tag' );

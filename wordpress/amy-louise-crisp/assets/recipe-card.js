@@ -37,6 +37,14 @@
     b.onclick = () => {
       const id = fr.dataset.yt;
       if (framed) { openOnYouTube(id); return; }
+      // YouTube may set cookies, so ask first if the visitor hasn't allowed videos
+      if (window.ALCConsent && !window.ALCConsent.allowed('media')) {
+        if (fr.querySelector('.video-consent')) return;
+        fr.insertAdjacentHTML('beforeend', `<div class="video-consent" role="dialog" aria-label="Allow YouTube video"><div><p>This video plays from YouTube, which may set cookies.</p><div class="btns"><button type="button" class="btn" data-allow>Allow and play</button><a class="btn line" href="https://youtu.be/${id}" target="_blank" rel="noopener">Watch on YouTube</a></div></div></div>`);
+        fr.querySelector('[data-allow]').onclick = () => { window.ALCConsent.allow('media'); fr.querySelector('.video-consent').remove(); b.click(); };
+        fr.querySelector('[data-allow]').focus();
+        return;
+      }
       $$('.video-frame').forEach(o => { if (o !== fr) stopVideo(o); });
       const f = document.createElement('iframe');
       f.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;

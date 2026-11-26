@@ -43,6 +43,7 @@ function alc_ad( $slot ) {
 	}
 	$code = trim( (string) get_theme_mod( 'ad_' . $slot, '' ) );
 	if ( alc_ads_on() && $code ) {
+		$code = function_exists( 'alc_consent_wrap' ) ? alc_consent_wrap( $code, 'ads' ) : $code;
 		echo '<div class="ad-slot ad-slot--' . esc_attr( $slot ) . '" aria-label="Advertisement">' . $code . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput -- code pasted by the site owner
 	} elseif ( alc_ads_preview() ) {
 		echo '<div class="ad-slot ad-slot--preview"><span>Advert space</span><small>' . esc_html( $slots[ $slot ] ) . '</small></div>';
@@ -53,7 +54,7 @@ function alc_ad( $slot ) {
 add_action( 'wp_head', function () {
 	$code = trim( (string) get_theme_mod( 'ads_head', '' ) );
 	if ( alc_ads_on() && $code ) {
-		echo "\n" . $code . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput -- code pasted by the site owner
+		echo "\n" . ( function_exists( 'alc_consent_wrap' ) ? alc_consent_wrap( $code, 'ads' ) : $code ) . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput -- code pasted by the site owner
 	}
 }, 1 );
 

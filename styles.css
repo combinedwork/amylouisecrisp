@@ -1058,3 +1058,61 @@ nav#nav a{white-space:nowrap}
   .swipe-hint{display:none!important}
   .cook-nav{padding-top:10px;padding-bottom:max(12px,env(safe-area-inset-bottom))}
 }
+
+/* ---------- cookie banner ---------- */
+.consent{position:fixed;left:16px;bottom:16px;z-index:45;width:min(440px,calc(100vw - 32px));animation:up .35s}
+.consent-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 20px 16px;box-shadow:0 24px 60px -18px rgba(43,45,43,.45)}
+.consent-title{font-size:20px;margin:0 0 6px}
+.consent p{margin:0 0 14px;font-size:15px;line-height:1.55;color:var(--text)}
+.consent p a{color:var(--sage-dd);font-weight:700;text-decoration:underline;text-decoration-color:var(--pink);text-underline-offset:3px;white-space:nowrap}
+.consent-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.consent-actions .btn{justify-content:center;min-height:46px;padding:10px 12px}
+.consent-actions .consent-btn{background:var(--sage-dd);color:#fff}
+.consent-actions .consent-btn:hover{background:var(--ink)}
+.consent-choose{grid-column:1/-1}
+.consent-prefs{display:grid;gap:4px;margin:0 0 14px;max-height:min(46vh,360px);overflow:auto;overscroll-behavior:contain}
+.consent-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:10px 0;border-top:1px solid var(--line);cursor:pointer}
+.consent-row b{display:block;color:var(--ink);font-size:15px}
+.consent-row small{display:block;color:var(--muted);font-size:13px;line-height:1.45}
+.consent-row input{appearance:none;flex-shrink:0;width:46px;height:28px;border-radius:999px;background:var(--line);position:relative;cursor:pointer;transition:background .2s}
+.consent-row input::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .2s}
+.consent-row input:checked{background:var(--sage-d)}
+.consent-row input:checked::after{transform:translateX(18px)}
+.consent-row input:disabled{opacity:.6;cursor:default}
+.consent-row input:focus-visible{outline:3px solid var(--honey);outline-offset:2px}
+@media (max-width:900px){
+  .consent{left:10px;right:10px;width:auto;bottom:calc(72px + env(safe-area-inset-bottom))}
+  body.consent-open .toast{bottom:calc(260px + env(safe-area-inset-bottom))}
+}
+@media (max-height:520px) and (max-width:900px){ .consent{bottom:calc(66px + env(safe-area-inset-bottom))} .consent-prefs{max-height:40vh} }
+.cook.open~.consent,body.lock .consent{display:none}
+
+/* video waiting for permission */
+.video-consent{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:20px;background:rgba(31,40,35,.86);color:#fff;z-index:3}
+.video-consent p{margin:0 0 12px;font-size:15px;max-width:34ch}
+.video-consent .btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.video-consent .btn{background:var(--pink);color:var(--ink);min-height:44px}
+.video-consent .btn.line{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}
+
+/* privacy page */
+.policy{max-width:780px}
+.policy h2{font-size:clamp(24px,3vw,30px);margin:40px 0 12px}
+.policy h3{font-size:20px;margin:24px 0 8px}
+.policy p,.policy li{color:var(--text)}
+.policy ul{padding-left:20px}
+.policy li{margin:6px 0}
+.policy table{width:100%;border-collapse:collapse;margin:12px 0 20px;font-size:15px;background:var(--surface);border-radius:12px;overflow:hidden}
+.policy th,.policy td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.policy th{background:var(--oat);font-family:var(--caps);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.policy .note{background:var(--pink-l);border-left:4px solid var(--pink);border-radius:8px;padding:12px 16px}
+.policy .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.cookie-btn{margin:8px 0 20px}
+.consent-prefs[hidden]{display:none}
+.consent-card:focus{outline:none}
+
+/* the pop-up message is fully hidden when not showing */
+.toast:not(.show){opacity:0;visibility:hidden}
+.toast{transition:transform .35s,opacity .25s,visibility .25s}
+
+/* footer legal links: easy to tap */
+.legal a{display:inline-flex;align-items:center;min-height:44px;padding:0 4px;color:inherit;text-decoration:underline;text-underline-offset:3px}

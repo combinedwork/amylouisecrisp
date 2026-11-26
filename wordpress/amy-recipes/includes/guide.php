@@ -27,6 +27,8 @@ function alc_links() {
 		'menu'     => array( '🧭 Menus', admin_url( 'nav-menus.php' ) ),
 		'media'    => array( '📷 All my photos', admin_url( 'upload.php' ) ),
 		'ads'      => array( '💷 Advertising', $customize( 'alc_ads' ) ),
+		'privacy'  => array( '🍪 Cookie banner & statistics', $customize( 'alc_privacy' ) ),
+		'policy'   => array( '📄 Privacy & Cookie Policy page', ( (int) get_option( 'wp_page_for_privacy_policy' ) ) ? get_edit_post_link( (int) get_option( 'wp_page_for_privacy_policy' ), 'raw' ) : admin_url( 'options-privacy.php' ) ),
 		'guide'    => array( '❓ Website guide', admin_url( 'admin.php?page=alc-guide' ) ),
 	);
 }
@@ -115,6 +117,16 @@ function alc_guide_page() {
 				<li><strong>Newsletter:</strong> <?php echo $a( 'news' ); // phpcs:ignore ?>. Paste the sign-up form code from your newsletter service (e.g. MailerLite or Kit).</li>
 				<li><strong>Social links:</strong> <?php echo $a( 'social' ); // phpcs:ignore ?>.</li>
 				<li><strong>Other pages</strong> (Privacy Policy, Contact…): Pages → Add New, then add them to a menu.</li>
+			</ul>
+		</div>
+
+		<div class="alc-card">
+			<h2>🍪 Privacy &amp; cookies</h2>
+			<p>Your site shows a cookie banner that meets UK rules: visitors can accept or reject, and nothing optional (statistics, adverts, YouTube videos) loads until they agree. They can change their mind any time with the <em>Cookie settings</em> link in the footer.</p>
+			<ul>
+				<li><strong>Change the banner wording</strong> or <strong>add Google Analytics</strong>: <?php echo $a( 'privacy' ); // phpcs:ignore ?>. Paste the Google Analytics code there – it only runs for visitors who say yes.</li>
+				<li><strong>Your Privacy &amp; Cookie Policy</strong>: <?php echo $a( 'policy' ); // phpcs:ignore ?>. It’s a normal page you can edit. Please read it through, and update it if you add a new service (for example when you choose a newsletter provider or start adverts – name your ad partner there).</li>
+				<li>If your ad network shows its own consent banner, tick <em>My ad network shows its own consent banner</em> in the same place.</li>
 			</ul>
 		</div>
 

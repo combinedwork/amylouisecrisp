@@ -29,7 +29,7 @@ $icons = array(
       <div><h2 class="foot-h">Recipes</h2><ul data-cat-links></ul></div>
       <div><h2 class="foot-h">More</h2><?php wp_nav_menu( array( 'theme_location' => 'footer', 'container' => false, 'items_wrap' => '<ul>%3$s</ul>', 'fallback_cb' => 'alc_footer_fallback', 'depth' => 1 ) ); ?></div>
     </div>
-    <div class="legal">© <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?></div>
+    <div class="legal">© <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?> · <a href="<?php echo esc_url( function_exists( 'alc_privacy_url' ) ? alc_privacy_url() : get_privacy_policy_url() ); ?>">Privacy &amp; cookies</a> · <a href="#cookie-settings" data-cookie-settings>Cookie settings</a></div>
   </div>
 </footer>
 <?php wp_footer(); ?>
