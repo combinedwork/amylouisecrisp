@@ -1,0 +1,34 @@
+.alc-form label.alc-label{display:block;font-weight:600;font-size:14px;margin:18px 0 2px}
+.alc-form .alc-help{margin:0 0 6px;color:#50575e}
+.alc-form textarea,.alc-form input[type=url],.alc-form input[type=text]{width:100%;font-size:14px;line-height:1.6}
+.alc-form .alc-mono{font-family:ui-monospace,Menlo,Consolas,monospace}
+.alc-form code{font-size:12px}
+.alc-optional{font-weight:400;color:#8c8f94;font-size:12px;margin-left:4px}
+.alc-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.alc-row--2{grid-template-columns:1fr 1fr}
+.alc-unit{display:flex;align-items:center;gap:6px}
+.alc-unit input{width:90px}
+.alc-check{display:block;margin-top:18px}
+.alc-tip{background:#fff4f9;border-left:4px solid #ff7eb9;padding:10px 12px;margin:10px 0}
+.alc-preview{display:grid;grid-template-columns:1fr 1.4fr;gap:24px}
+.alc-preview h4{margin:6px 0}
+.alc-preview ul,.alc-preview ol{margin:0 0 0 18px}
+.alc-preview li{margin:4px 0}
+.alc-group{font-weight:600;margin:10px 0 2px;color:#3f594d}
+.alc-note{color:#8c8f94;font-size:12px}
+.alc-timer{background:#ffe4f0;color:#b8366f;border-radius:20px;padding:1px 8px;font-size:12px;white-space:nowrap}
+.alc-ok{background:#eef4f0;border-left:4px solid #557565;padding:8px 12px;margin-top:14px}
+.alc-steps{margin-left:18px}
+.alc-steps li{margin:4px 0}
+.alc-image-preview{max-width:180px;border-radius:8px;display:block;margin:6px 0}
+.alc-image-preview[hidden]{display:none}
+.alc-settings .alc-card,.alc-guide .alc-card{background:#fff;border:1px solid #dcdcde;border-radius:10px;padding:8px 24px 16px;margin:20px 0;max-width:900px}
+.alc-presets{display:flex;flex-wrap:wrap;gap:6px}
+.alc-guide .alc-lead{font-size:15px}
+.alc-guide li{margin:6px 0;font-size:14px}
+.alc-guide ol,.alc-guide ul{margin-left:20px}
+.alc-guide ul{list-style:disc}
+.alc-quick-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;max-width:950px;margin:14px 0}
+.alc-quick-grid a{background:#fff;border:1px solid #dcdcde;border-radius:8px;padding:10px 12px;text-decoration:none;font-weight:600}
+.alc-quick-grid a:hover{border-color:#8baa9b;background:#eef4f0}
+@media (max-width:782px){.alc-row,.alc-row--2,.alc-preview{grid-template-columns:1fr}}

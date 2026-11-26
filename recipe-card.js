@@ -15,7 +15,9 @@
     return n.toFixed(1); };
   const amount = (q, u, s, base) => { if (q == null) return ''; const v = q * s / base;
     if (u === 'g' || u === 'ml') return Math.max(5, Math.round(v / 5) * 5) + u + ' ';
-    return fr(v) + (u ? ' ' + u : '') + ' '; };
+    // counted things (eggs, onions, sausages) round to whole numbers once there's at least one
+    if (!u && v >= 1) return Math.round(v) + ' ';
+    return fr(Math.max(.25, Math.round(v * 4) / 4)) + (u ? ' ' + u : '') + ' '; };
   const play = s => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`;
 
   /* ---------- video players (load only when played) ---------- */
@@ -77,7 +79,8 @@
   </div>`);
 
   let R = null, steps = [], cur = 0, secs = 0, run = null, wl = null, servesNow = 4;
-  const tShow = () => { $('#tDisp').textContent = Math.floor(secs / 60) + ':' + String(secs % 60).padStart(2, '0'); };
+  const tShow = () => { const h = Math.floor(secs / 3600), m = Math.floor(secs % 3600 / 60), s2 = String(secs % 60).padStart(2, '0');
+    $('#tDisp').textContent = h ? `${h}:${String(m).padStart(2, '0')}:${s2}` : `${m}:${s2}`; };
   const tStop = () => { clearInterval(run); run = null; $('#tGo').textContent = 'Start'; };
   const tStart = () => { if (!secs) return; $('#timer').classList.remove('ring'); $('#tGo').textContent = 'Pause';
     run = setInterval(() => { secs--; tShow(); if (secs <= 0) { tStop(); $('#timer').classList.add('ring'); toast('⏰ Time’s up!'); try { navigator.vibrate && navigator.vibrate([200, 100, 200]); } catch (e) {} } }, 1000); };
@@ -132,7 +135,7 @@
     const H = opts.h1 ? 'h1' : 'h2';
     host.innerHTML = `
     <div class="wrap rec">
-      <div class="ph reveal"><img src="${r.image}" alt="${esc(r.title)}" style="object-position:${r.imagePos || '50% 50%'}"></div>
+      <div class="ph reveal">${r.image ? `<img src="${r.image}" alt="${esc(r.title)}" style="object-position:${r.imagePos || '50% 50%'}">` : `<span class="festive-art plain" aria-hidden="true">${esc(r.title.charAt(0))}</span>`}</div>
       <div class="reveal">
         <span class="eyebrow">${esc(opts.eyebrow || cats.map(c => c.name).join(' · '))}</span>
         <${H}>${esc(r.title)}</${H}>

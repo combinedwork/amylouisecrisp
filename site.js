@@ -10,23 +10,27 @@
   const D = window.ALC_DATA;
   const esc = s => String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const cat = slug => D.categories.find(c => c.slug === slug);
-  const recipeUrl = r => 'recipe.html?r=' + encodeURIComponent(r.slug);
-  const catUrl = slug => 'recipes.html#' + slug;
+  // page addresses: the static mock-up uses .html files, WordPress passes its own links in data.links
+  const L = Object.assign({ home:'index.html', recipes:'recipes.html', about:'about.html', recipe:'recipe.html?r=' }, D.links || {});
+  const recipeUrl = r => r.url || L.recipe + encodeURIComponent(r.slug);
+  const catUrl = slug => L.recipes + '#' + slug;
+  // words a recipe can be found by: title, collections, keywords and ingredient names
+  const kw = r => [r.title, r.keywords || '', r.categories.map(x => (cat(x)||{}).name || '').join(' '), (r.ingredients || []).flatMap(g => g.items.map(i => i[2])).join(' ')].join(' ').toLowerCase();
   const inCat = slug => D.recipes.filter(r => r.categories.includes(slug));
   const time = m => m>=60 ? (m%60 ? `${Math.floor(m/60)} hr ${m%60} mins` : `${m/60} hr${m>=120?'s':''}`) : `${m} mins`;
   const heartSvg = '<svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>';
-  const catThumb = c => c.image ? `<img src="${c.image}" alt="" style="object-position:${c.pos||'50% 50%'}">` : `<span class="festive-art" aria-hidden="true">${D.season.emoji||'✨'}</span>`;
+  const catThumb = c => c.image ? `<img src="${c.image}" alt="" style="object-position:${c.pos||'50% 50%'}">` : c.seasonal ? `<span class="festive-art" aria-hidden="true">${D.season.emoji||'✨'}</span>` : `<span class="festive-art plain" aria-hidden="true">${esc(c.name.charAt(0))}</span>`;
   const cardHTML = (r, extra='') => {
-    const c = cat(r.categories[0]);
+    const c = cat(r.categories[0]) || { name: 'Recipe' };
     return `<div class="card ${extra}" data-id="${r.slug}" data-cats="${r.categories.join(' ')}">
       <button class="heart" aria-label="Save ${esc(r.title)}">${heartSvg}</button>
-      <a href="${recipeUrl(r)}"><div class="ph"><img src="${r.image}" alt="${esc(r.title)}" style="object-position:${r.imagePos||'50% 50%'}" loading="lazy">${r.isNew?'<span class="badge">New</span>':''}</div>
+      <a href="${recipeUrl(r)}"><div class="ph">${r.image ? `<img src="${r.image}" alt="${esc(r.title)}" style="object-position:${r.imagePos||'50% 50%'}" loading="lazy">` : `<span class="festive-art plain" aria-hidden="true">${esc(r.title.charAt(0))}</span>`}${r.isNew?'<span class="badge">New</span>':''}</div>
       <span class="label">${esc(c.name)}</span><h3>${esc(r.title)}</h3><span class="meta">${time(r.prep+r.cook)} · Serves ${r.serves}</span>
       <span class="desc">${esc(r.summary)}</span></a></div>`;
   };
   const soonCard = (c, extra='') => `<div class="card soon-card ${extra}" data-id="soon-${c.slug}" data-cats="${c.slug}">
       <a href="${catUrl(c.slug)}"><div class="ph soon"><span>Coming soon</span></div><span class="label">${esc(c.name)}</span>
-      <h3>New ${esc(c.seasonal ? D.season.name.toLowerCase()+' ' : '')}recipes on the way</h3><span class="meta">${esc(c.blurb)}</span></a></div>`;
+      <h3>New ${esc(c.seasonal ? D.season.name+' ' : '')}recipes on the way</h3><span class="meta">${esc(c.blurb)}</span></a></div>`;
   // footer + "browse" strips are filled from the category list
   document.querySelectorAll('[data-cat-links]').forEach(ul => ul.innerHTML = D.categories.filter(c=>c.group!=='tag').map(c => `<li><a href="${catUrl(c.slug)}">${esc(c.name)}</a></li>`).join(''));
   document.querySelectorAll('[data-cat-strip]').forEach(el => el.innerHTML = D.categories.filter(c=>c.group!=='tag').map(c => {
@@ -37,7 +41,7 @@
   document.querySelectorAll('[data-yt-channel]').forEach(a => { if (D.youtubeChannel) { a.href = D.youtubeChannel; a.target = '_blank'; a.rel = 'noopener'; } });
 
   /* toast + back to top (injected) */
-  document.body.insertAdjacentHTML('beforeend', '<div class="toast" id="toast" role="status"></div><button class="top-btn" id="topBtn" aria-label="Back to top">↑</button><div class="mock-badge">Design mock‑up</div>');
+  document.body.insertAdjacentHTML('beforeend', '<div class="toast" id="toast" role="status"></div><button class="top-btn" id="topBtn" aria-label="Back to top">↑</button>' + (D.links ? '' : '<div class="mock-badge">Design mock‑up</div>'));
   let tt; const toast = msg => { const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(tt); tt=setTimeout(()=>t.classList.remove('show'),2200); };
 
   /* header */
@@ -63,11 +67,11 @@
       ${$('footer .socials') ? '<div class="socials">'+$('footer .socials').innerHTML+'</div>' : ''}
     </aside>
     <nav class="tabbar-m" aria-label="Quick navigation">
-      <a href="index.html" data-tab="home">${ico.home}Home</a>
-      <a href="recipes.html" data-tab="recipes">${ico.book}Recipes</a>
+      <a href="${L.home}" data-tab="home">${ico.home}Home</a>
+      <a href="${L.recipes}" data-tab="recipes">${ico.book}Recipes</a>
       <button id="tabSearch" data-tab="search">${ico.search}Search</button>
-      <a href="recipes.html#saved" data-tab="saved">${ico.heart}Saved<span class="count" data-favcount>0</span></a>
-      <a href="about.html" data-tab="about">${ico.user}About</a>
+      <a href="${L.recipes}#saved" data-tab="saved">${ico.heart}Saved<span class="count" data-favcount>0</span></a>
+      <a href="${L.about}" data-tab="about">${ico.user}About</a>
     </nav>`);
   const setDrawer = open => {
     document.body.classList.toggle('drawer-open', open);
@@ -118,7 +122,7 @@
     toast(on?'Saved to your recipes ♥':'Removed from saved'); syncFavs();
   };
   document.addEventListener('click', e => { const h=e.target.closest('.heart'); if(h){ e.preventDefault(); toggleFav(h.closest('[data-id]').dataset.id, h); } });
-  $('#favBtn').onclick = () => { location.href = 'recipes.html#saved'; if(page==='recipes') dispatchEvent(new HashChangeEvent('hashchange')); };
+  $('#favBtn').onclick = () => { location.href = L.recipes + '#saved'; if(page==='recipes') dispatchEvent(new HashChangeEvent('hashchange')); };
 
   /* search (overlay injected) */
   document.body.insertAdjacentHTML('beforeend', `
@@ -138,10 +142,10 @@
     </div>
   </div>`);
   const INDEX = [
-    ...D.recipes.map(r => ({t:r.title, s:r.categories.map(x=>cat(x).name).join(' · ')+' · '+time(r.prep+r.cook), k:(r.keywords||'')+' '+r.categories.map(x=>cat(x).name).join(' ')+' '+r.ingredients.flatMap(g=>g.items.map(i=>i[2])).join(' '), img:r.image, href:recipeUrl(r)})),
-    ...D.categories.map(c => ({t:c.name, s:c.seasonal ? 'Category · '+D.season.name : 'Category', k:c.blurb+(c.seasonal?' '+D.season.name+' seasonal christmas easter halloween summer':''), img:c.image||'img/sq-21.jpg', href:catUrl(c.slug)})),
-    {t:'All Recipes', s:'Page', k:'recipes all browse index', img:'img/pasta.jpg', href:'recipes.html'},
-    {t:'About Me', s:'Page', k:'about amy mum story contact', img:'img/sq-21.jpg', href:'about.html'}
+    ...D.recipes.map(r => ({t:r.title, s:r.categories.map(x=>(cat(x)||{}).name).filter(Boolean).join(' · ')+' · '+time(r.prep+r.cook), k:kw(r), img:r.image, href:recipeUrl(r)})),
+    ...D.categories.map(c => ({t:c.name, s:c.seasonal ? 'Category · '+D.season.name : 'Category', k:c.blurb+(c.seasonal?' '+D.season.name+' seasonal christmas easter halloween summer':''), img:c.image||(D.recipes[0]||{}).image||'', href:catUrl(c.slug)})),
+    {t:'All Recipes', s:'Page', k:'recipes all browse index', img:(D.recipes[0]||{}).image||'', href:L.recipes},
+    {t:'About Me', s:'Page', k:'about amy mum story contact', img:D.aboutImage||(D.recipes[0]||{}).image||'', href:L.about}
   ];
   let sel=0, hits=[];
   const hl = (t,q) => { if(!q) return esc(t); const i=t.toLowerCase().indexOf(q); return i<0?esc(t):esc(t.slice(0,i))+'<mark>'+esc(t.slice(i,i+q.length))+'</mark>'+esc(t.slice(i+q.length)); };
@@ -183,5 +187,5 @@
 
   syncFavs();
   window.ALC = { $, $$, store, toast, favs, toggleFav, onFavs: f => listeners.push(f), reveal, esc, swipe,
-    data: D, cat, recipeUrl, catUrl, inCat, time, cardHTML, soonCard, catThumb, syncFavs };
+    data: D, links: L, kw, cat, recipeUrl, catUrl, inCat, time, cardHTML, soonCard, catThumb, syncFavs };
 })();
