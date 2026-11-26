@@ -18,7 +18,7 @@
 
   /* ---------- latest recipe card + cook mode ---------- */
   const latest = D.recipes[0];
-  if (latest) renderRecipe($('#recipe'), latest, { eyebrow: 'Latest recipe · ' + latest.categories.map(x => (cat(x) || {}).name).filter(Boolean).join(' · ') });
+  if (latest) renderRecipe($('#recipe'), latest, { eyebrow: 'Latest recipe' + ((cat(latest.categories[0]) || {}).name ? ' · ' + cat(latest.categories[0]).name : '') });
   else $('#recipe').remove();
 
   /* ---------- watch & cook along ---------- */
@@ -40,7 +40,8 @@
     $$('#grid .card').forEach(c => { const ok = f === 'all' || (f === 'saved' ? favs.has(c.dataset.id) : c.dataset.cats.split(' ').includes(f));
       c.classList.toggle('hide', !ok); if (ok) { shown++; c.classList.add('in'); } });
     $('#empty').classList.toggle('show', !shown);
-    $('#empty p').innerHTML = f === 'saved' ? 'Tap the ♡ on any recipe to save it for later.' : `New ${esc(cat(f).name)} recipes are on their way. <a href="#newsletter">Sign up</a> to hear first!`;
+    const fc = cat(f);
+    $('#empty p').innerHTML = f === 'saved' ? 'Tap the ♡ on any recipe to save it for later.' : fc ? `New ${esc(fc.name)} recipes are on their way. <a href="#newsletter">Sign up</a> to hear first!` : '';
   };
   $$('#filters button').forEach(b => b.onclick = () => applyFilter(b.dataset.filter));
   onFavs(() => { if (active === 'saved') applyFilter('saved'); });

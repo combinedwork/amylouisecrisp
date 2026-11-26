@@ -135,7 +135,7 @@
     <div class="modal">
       <div class="search-box">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--sage-d)" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-        <input id="q" placeholder="Search recipes, ingredients…" autocomplete="off" aria-label="Search">
+        <input id="q" placeholder="Search recipes…" autocomplete="off" aria-label="Search">
         <button class="close" data-close aria-label="Close">✕</button>
       </div>
       <div class="results" id="results"></div>
