@@ -645,3 +645,159 @@
   .t-short{display:none}
   .card-video{margin-bottom:4px}
   @media (max-width:520px){.t-full{display:none}.t-short{display:inline}.tabbar button{white-space:nowrap}}
+
+/* =====================================================================
+   BRAND (client feedback, Nov 2026)
+   Sage #8BAA9B · Cream #F8F5EF · Pink #FF7EB9 for little pops
+   Headings: The Seasons (logo font) · Tagline + labels: Josefin Sans caps
+   ===================================================================== */
+/* The Seasons is a licensed font. It shows here if it's installed on the
+   device; for the live site, add the licensed web font file and point a
+   src: url(...) line at it. Until then Playfair Display stands in. */
+@font-face{font-family:"The Seasons";src:local("The Seasons"),local("TheSeasons-Regular"),local("The Seasons Regular");font-display:swap}
+:root{
+  --display:"The Seasons","Playfair Display",Georgia,serif;
+  --caps:"Josefin Sans","Lato",system-ui,sans-serif;
+  --bg:#f8f5ef;  --oat:#eef4f0;  --surface:#ffffff;
+  --ink:#2b2d2b; --text:#3b3d3a; --muted:#666b67; --line:#e5e0d6;
+  --sage:#8baa9b; --sage-d:#557565; --sage-dd:#3f594d; --sage-l:#dce8e1; --sage-xl:#eef4f0;
+  --pink:#ff7eb9; --pink-l:#ffe4f0; --pink-d:#b8366f;
+  --honey:var(--pink); --rose:var(--pink); --terra-l:var(--pink-l);
+  --btn:#4f6f61;
+}
+h1,h2,h3,.serif,.brand .name,.ing-group,.facts b,.quote,.sig,.video-label b,.cook-body p,.cat h3,.card h3,.picker .q,.drawer-head .serif,.sticker b,.video-points span{font-family:var(--display)}
+header,.tabbar-m{background:rgba(248,245,239,.95)}
+
+/* logo */
+.brand .name{color:var(--sage-dd);letter-spacing:.005em}
+.brand .tag{font-family:var(--caps);text-transform:uppercase;letter-spacing:.16em;font-size:10.5px;font-weight:600;color:var(--sage-d)}
+footer .brand .tag{color:var(--sage-d)}
+
+/* labels in Josefin Sans caps, with a little pink pop */
+.eyebrow{font-family:var(--caps);font-weight:600;letter-spacing:.16em;color:var(--sage-d);display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:18px;height:2px;border-radius:2px;background:var(--pink);flex-shrink:0}
+.label{font-family:var(--caps);font-weight:600;letter-spacing:.12em;color:var(--sage-d)}
+nav#nav a{font-family:var(--caps);text-transform:uppercase;letter-spacing:.09em;font-size:13.5px;font-weight:600;padding-top:9px}
+nav#nav ul{gap:24px}
+nav#nav a:hover,nav#nav a.on{border-color:var(--pink);color:var(--ink)}
+.facts small,.filters button,.tabbar button{font-family:var(--caps);letter-spacing:.04em}
+.facts small{letter-spacing:.12em}
+
+/* hero */
+.hero h1 em{color:var(--sage-d);font-style:italic;background:linear-gradient(transparent 62%,var(--pink-l) 62%);padding:0 .08em}
+.hero-img::before{background:var(--pink-l)}
+
+/* buttons */
+.btn{background:var(--btn);color:#fff}
+.btn:hover{background:var(--sage-dd)}
+.btn.dark{background:var(--sage-dd)} .btn.dark:hover{background:var(--ink)}
+.btn.line{background:transparent;color:var(--sage-dd);border-color:var(--sage)}
+.btn.line:hover{background:var(--sage-dd);border-color:var(--sage-dd);color:#fff}
+
+/* pops of pink */
+.badge,.sticker .dot,.count{background:var(--pink);color:var(--ink)}
+.heart{color:var(--pink-d)}
+.heart.on svg{fill:var(--pink);stroke:var(--pink-d)}
+.quote::before,.sig{color:var(--pink-d)}
+.sig{color:var(--sage-d)}
+.quote::before{color:var(--pink)}
+.ing input:checked{background:var(--sage-d);border-color:var(--sage-d)}
+.steps li.done::before{background:var(--sage-d)}
+.result mark{background:var(--pink-l)}
+.drawer li a.on{color:var(--sage-dd);box-shadow:inset 3px 0 0 var(--pink)}
+::selection{background:var(--pink-l)}
+
+/* sections */
+.featured,.about,.page-hero{background:var(--oat)}
+.page-hero::after{background:var(--pink-l);opacity:.75}
+.picker{background:var(--sage-dd)}
+.picker .q{font-size:22px}
+.pill.on{color:var(--sage-dd)}
+.picker-out a{color:#fff;text-decoration-color:var(--pink);text-decoration-thickness:2px;text-underline-offset:3px}
+
+/* newsletter: sage panel, pink button */
+.news{background:var(--sage);color:var(--ink)}
+.news::after{background:rgba(255,255,255,.14)}
+.news h2{color:var(--ink)}
+.news p{opacity:1}
+.news .eyebrow{color:var(--ink)}
+.news .btn{background:var(--pink);color:var(--ink)}
+.news .btn:hover{background:#ff69ae}
+.news small{color:var(--ink);opacity:.8}
+.news .err{color:#7a1238}
+.news input[type=email].bad{border-color:#7a1238}
+
+/* watch & cook along */
+.video-sec{background:var(--sage-dd)}
+.video-sec .eyebrow{color:#f7d2e3}
+.video-sec .btn{background:var(--pink);color:var(--ink)}
+.video-sec .btn:hover{background:#ff69ae}
+.video-sec .btn.line{background:transparent;color:#fff;border-color:rgba(255,255,255,.55)}
+.video-sec .btn.line:hover{background:#fff;color:var(--sage-dd)}
+.video-poster .play{background:var(--pink);color:var(--ink)}
+
+/* cook mode */
+.cook{background:var(--sage-dd)}
+.bar i{background:var(--pink)}
+.timer.ring .t{color:var(--pink)}
+.cook-ings{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;align-items:center}
+.cook-ings:empty{display:none}
+.cook-ings small{width:100%;font-family:var(--caps);text-transform:uppercase;letter-spacing:.14em;font-size:12px;opacity:.75}
+.cook-ings span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:5px 12px;font-size:15px}
+.step-timer{display:inline-block;margin-top:6px;font-size:13px;background:var(--pink-l);color:var(--pink-d);border-radius:999px;padding:2px 10px;font-weight:700}
+.steps li{grid-template-columns:40px 1fr}
+.progress-note a{color:var(--sage-dd);font-weight:700;text-decoration:underline;text-decoration-color:var(--pink);text-underline-offset:3px}
+
+/* coming-soon cards */
+.soon{background:repeating-linear-gradient(135deg,var(--sage-xl) 0 14px,#fff 14px 28px)}
+.soon span{font-family:var(--display);font-style:italic;color:var(--sage-dd);font-size:19px;background:var(--surface);padding:6px 14px;border-radius:999px;box-shadow:0 0 0 1px var(--sage-l)}
+.soon-card .meta{display:block}
+
+/* festive tile (no photo needed – changes with the season) */
+.festive-art{display:grid;place-items:center;width:100%;height:100%;font-size:64px;background:radial-gradient(circle at 30% 25%,#fff 0 18%,transparent 19%),radial-gradient(circle at 75% 70%,rgba(255,255,255,.7) 0 10%,transparent 11%),linear-gradient(135deg,var(--pink-l),#fff3f8 55%,var(--sage-xl))}
+.festive-th .festive-art{font-size:26px}
+.season-badge{display:inline-block;font-family:var(--caps);text-transform:uppercase;letter-spacing:.12em;font-weight:600;font-size:12px;background:var(--pink);color:var(--ink);padding:6px 12px;border-radius:999px;margin-bottom:12px}
+.season-badge[hidden]{display:none}
+
+/* "Something a little different": festive + fakeaways + one pan */
+.collections{padding-top:8px}
+.coll-grid{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:24px}
+.coll{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.coll:hover{transform:translateY(-4px);box-shadow:0 20px 40px -26px rgba(43,45,43,.45)}
+.coll-img{display:block;aspect-ratio:16/10;overflow:hidden}
+.coll-img img{transition:transform .5s}
+.coll:hover .coll-img img{transform:scale(1.05)}
+.coll-body{display:flex;flex-direction:column;gap:6px;padding:20px 22px 22px;flex:1}
+.coll-body h3{font-size:24px}
+.coll-body p{margin:0;color:var(--muted);font-size:15.5px}
+.coll-link{margin-top:auto;padding-top:10px;font-weight:700;color:var(--sage-dd);font-size:15px}
+.coll-festive{position:relative;background:linear-gradient(150deg,var(--pink-l),#fff6fa 45%,var(--sage-xl));border-color:#f9cfe2;justify-content:flex-end;min-height:340px}
+.coll-festive .season-badge{position:absolute;top:20px;left:22px;margin:0}
+.festive-mark{position:absolute;right:22px;top:16px;font-size:74px;line-height:1;filter:drop-shadow(0 8px 14px rgba(184,54,111,.18));transition:transform .4s}
+.coll-festive:hover .festive-mark{transform:rotate(-8deg) scale(1.06)}
+.coll-festive .coll-body{padding:28px}
+.coll-festive h3{font-size:clamp(28px,3vw,36px)}
+.coll-festive p{color:var(--text)}
+.coll-festive .eyebrow{margin-bottom:2px}
+
+/* single recipe page */
+.recipe-top{background:var(--oat);padding:22px 0 0}
+.recipe-top .crumbs{margin:0}
+.recipe-top .crumbs span{color:var(--muted)}
+.recipe-page{padding-top:28px}
+.recipe-page h1{font-size:clamp(32px,4vw,48px);margin:10px 0 14px}
+
+@media (max-width:1060px){nav#nav ul{gap:16px} nav#nav a{font-size:12.5px;letter-spacing:.06em}}
+@media (max-width:900px){
+  .coll-grid{grid-template-columns:1fr 1fr}
+  .coll-festive{grid-column:1/-1;min-height:280px}
+  .brand .tag{font-size:9.5px;letter-spacing:.14em}
+  .tabbar{background:var(--oat)}
+}
+@media (max-width:520px){
+  .coll-grid{grid-template-columns:1fr;gap:16px}
+  .festive-mark{font-size:56px}
+  .picker .q{font-size:20px}
+}
+.coll-festive .coll-body{padding-top:96px}
+@media (max-width:520px){.coll-festive .coll-body{padding:84px 22px 24px}.coll-festive{min-height:0}}

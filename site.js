@@ -6,6 +6,36 @@
     set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
   };
 
+  /* ---------- content helpers (everything comes from data.js) ---------- */
+  const D = window.ALC_DATA;
+  const esc = s => String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const cat = slug => D.categories.find(c => c.slug === slug);
+  const recipeUrl = r => 'recipe.html?r=' + encodeURIComponent(r.slug);
+  const catUrl = slug => 'recipes.html#' + slug;
+  const inCat = slug => D.recipes.filter(r => r.categories.includes(slug));
+  const time = m => m>=60 ? (m%60 ? `${Math.floor(m/60)} hr ${m%60} mins` : `${m/60} hr${m>=120?'s':''}`) : `${m} mins`;
+  const heartSvg = '<svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>';
+  const catThumb = c => c.image ? `<img src="${c.image}" alt="" style="object-position:${c.pos||'50% 50%'}">` : `<span class="festive-art" aria-hidden="true">${D.season.emoji||'✨'}</span>`;
+  const cardHTML = (r, extra='') => {
+    const c = cat(r.categories[0]);
+    return `<div class="card ${extra}" data-id="${r.slug}" data-cats="${r.categories.join(' ')}">
+      <button class="heart" aria-label="Save ${esc(r.title)}">${heartSvg}</button>
+      <a href="${recipeUrl(r)}"><div class="ph"><img src="${r.image}" alt="${esc(r.title)}" style="object-position:${r.imagePos||'50% 50%'}" loading="lazy">${r.isNew?'<span class="badge">New</span>':''}</div>
+      <span class="label">${esc(c.name)}</span><h3>${esc(r.title)}</h3><span class="meta">${time(r.prep+r.cook)} · Serves ${r.serves}</span>
+      <span class="desc">${esc(r.summary)}</span></a></div>`;
+  };
+  const soonCard = (c, extra='') => `<div class="card soon-card ${extra}" data-id="soon-${c.slug}" data-cats="${c.slug}">
+      <a href="${catUrl(c.slug)}"><div class="ph soon"><span>Coming soon</span></div><span class="label">${esc(c.name)}</span>
+      <h3>New ${esc(c.seasonal ? D.season.name.toLowerCase()+' ' : '')}recipes on the way</h3><span class="meta">${esc(c.blurb)}</span></a></div>`;
+  // footer + "browse" strips are filled from the category list
+  document.querySelectorAll('[data-cat-links]').forEach(ul => ul.innerHTML = D.categories.filter(c=>c.group!=='tag').map(c => `<li><a href="${catUrl(c.slug)}">${esc(c.name)}</a></li>`).join(''));
+  document.querySelectorAll('[data-cat-strip]').forEach(el => el.innerHTML = D.categories.filter(c=>c.group!=='tag').map(c => {
+    const n = inCat(c.slug).length;
+    return `<a href="${catUrl(c.slug)}" class="reveal"><span class="th${c.image?'':' festive-th'}">${catThumb(c)}</span><span><b>${esc(c.name)}</b><small>${c.seasonal ? esc(D.season.name)+' · ' : ''}${n ? n+' recipe'+(n>1?'s':'') : 'Coming soon'}</small></span></a>`;
+  }).join(''));
+
+  document.querySelectorAll('[data-yt-channel]').forEach(a => { if (D.youtubeChannel) { a.href = D.youtubeChannel; a.target = '_blank'; a.rel = 'noopener'; } });
+
   /* toast + back to top (injected) */
   document.body.insertAdjacentHTML('beforeend', '<div class="toast" id="toast" role="status"></div><button class="top-btn" id="topBtn" aria-label="Back to top">↑</button><div class="mock-badge">Design mock‑up</div>');
   let tt; const toast = msg => { const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(tt); tt=setTimeout(()=>t.classList.remove('show'),2200); };
@@ -29,7 +59,7 @@
     <aside class="drawer" id="drawer" aria-label="Menu" aria-hidden="true">
       <div class="drawer-head"><span class="serif">Menu</span><button class="close" id="drawerClose" aria-label="Close menu">✕</button></div>
       <nav><ul>${$('#nav ul').innerHTML}</ul></nav>
-      <div class="drawer-cta"><p><b class="serif" style="font-size:19px">New recipes, straight to your inbox</b><br>Be the first to hear when new recipes go live.</p><a class="btn" href="#newsletter" data-close-drawer>Sign me up</a></div>
+      <div class="drawer-cta"><p><b class="serif" style="font-size:19px">New recipes, straight to your inbox</b><br>A monthly round‑up of new recipes and family favourites.</p><a class="btn" href="#newsletter" data-close-drawer>Sign me up</a></div>
       ${$('footer .socials') ? '<div class="socials">'+$('footer .socials').innerHTML+'</div>' : ''}
     </aside>
     <nav class="tabbar-m" aria-label="Quick navigation">
@@ -108,17 +138,12 @@
     </div>
   </div>`);
   const INDEX = [
-    {t:'Creamy Chicken Pesto Pasta', s:'Easy Family Dinners · 30 Minute Meals · 20 mins', k:'chicken pasta pesto creamy mushrooms mozzarella parmesan dinner 30 minute quick', img:'img/pasta.jpg', href:'index.html#recipe'},
-    {t:'Easy Family Dinners', s:'Category', k:'dinner family weeknight', img:'img/sq-7-1.jpg', href:'recipes.html#dinners'},
-    {t:'30 Minute Meals', s:'Category', k:'30 minute quick fast', img:'img/pasta.jpg', href:'recipes.html#30'},
-    {t:'Slow Cooker Stash', s:'Category', k:'slow cooker stew casserole', img:'img/sq-33-1.jpg', href:'recipes.html#slow'},
-    {t:'Lunchbox Line Up', s:'Category', k:'lunchbox lunch school kids packed', img:'img/hero.jpg', href:'recipes.html#lunch'},
-    {t:'Baking', s:'Category', k:'baking cake cookies bake sweet treats', img:'img/sq-21.jpg', href:'recipes.html#baking'},
-    {t:'All Recipes', s:'Page', k:'recipes all browse index', img:'img/sq-7-1.jpg', href:'recipes.html'},
+    ...D.recipes.map(r => ({t:r.title, s:r.categories.map(x=>cat(x).name).join(' · ')+' · '+time(r.prep+r.cook), k:(r.keywords||'')+' '+r.categories.map(x=>cat(x).name).join(' ')+' '+r.ingredients.flatMap(g=>g.items.map(i=>i[2])).join(' '), img:r.image, href:recipeUrl(r)})),
+    ...D.categories.map(c => ({t:c.name, s:c.seasonal ? 'Category · '+D.season.name : 'Category', k:c.blurb+(c.seasonal?' '+D.season.name+' seasonal christmas easter halloween summer':''), img:c.image||'img/sq-21.jpg', href:catUrl(c.slug)})),
+    {t:'All Recipes', s:'Page', k:'recipes all browse index', img:'img/pasta.jpg', href:'recipes.html'},
     {t:'About Me', s:'Page', k:'about amy mum story contact', img:'img/sq-21.jpg', href:'about.html'}
   ];
   let sel=0, hits=[];
-  const esc = s => String(s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const hl = (t,q) => { if(!q) return esc(t); const i=t.toLowerCase().indexOf(q); return i<0?esc(t):esc(t.slice(0,i))+'<mark>'+esc(t.slice(i,i+q.length))+'</mark>'+esc(t.slice(i+q.length)); };
   const doSearch = () => {
     const q=$('#q').value.trim().toLowerCase();
@@ -151,11 +176,12 @@
       e.preventDefault(); const em=$('#email'), v=em.value.trim();
       if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){ em.classList.add('bad'); $('#err').textContent='Please enter a valid email address.'; em.focus(); return; }
       em.classList.remove('bad');
-      $('#newsWrap').innerHTML = '<p class="serif" style="color:#fff;font-size:26px;margin:0">Thank you! 💛</p><p style="margin-top:6px">You’re on the list. Keep an eye on your inbox for new recipes.</p>';
+      $('#newsWrap').innerHTML = '<p class="serif" style="font-size:28px;margin:0">Thank you! 💕</p><p style="margin-top:6px">You’re on the list. Look out for my next monthly email.</p>';
     };
     $('#email').oninput = () => { $('#email').classList.remove('bad'); $('#err').textContent=''; };
   }
 
   syncFavs();
-  window.ALC = { $, $$, store, toast, favs, toggleFav, onFavs: f => listeners.push(f), reveal, esc, swipe };
+  window.ALC = { $, $$, store, toast, favs, toggleFav, onFavs: f => listeners.push(f), reveal, esc, swipe,
+    data: D, cat, recipeUrl, catUrl, inCat, time, cardHTML, soonCard, catThumb, syncFavs };
 })();

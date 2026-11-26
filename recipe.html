@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f8f5ef">
+<title>Recipe · Amy Louise Crisp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&family=Lato:wght@400;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="recipes">
+
+<header id="hdr">
+  <div class="wrap head">
+    <a href="index.html" class="brand" aria-label="Amy Louise Crisp home"><span class="name">Amy Louise Crisp</span><span class="tag">Family recipes you'll actually make</span></a>
+    <nav id="nav">
+      <ul>
+        <li><a href="index.html" data-nav="home">Home</a></li>
+        <li><a href="recipes.html" data-nav="recipes">Recipes</a></li>
+        <li><a href="recipes.html#festive" data-nav="recipes">Festive Favourites</a></li>
+        <li><a href="recipes.html#fakeaways" data-nav="recipes">Fakeaways</a></li>
+        <li><a href="recipes.html#onepan" data-nav="recipes">One Pan Wonders</a></li>
+        <li><a href="about.html" data-nav="about">About Me</a></li>
+      </ul>
+    </nav>
+    <div class="icons">
+      <button class="icon-btn" id="favBtn" aria-label="Saved recipes" title="Saved recipes"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span class="count" id="favCount">0</span></button>
+      <button class="icon-btn" id="searchBtn" aria-label="Search" title="Search ( / )"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="recipe-top">
+    <div class="wrap crumbs" id="crumbs"><a href="index.html">Home</a> / <a href="recipes.html">Recipes</a></div>
+  </div>
+
+  <section class="featured recipe-page" id="recipe"></section>
+
+  <section id="more">
+    <div class="wrap">
+      <div class="sec-head reveal"><div><span class="eyebrow">You might also like</span><h2 id="moreTitle">More recipes</h2></div><a href="recipes.html" class="more" id="moreLink">See all →</a></div>
+      <div class="grid" id="moreGrid"></div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter">
+    <div class="wrap">
+      <div class="news reveal">
+        <div>
+          <span class="eyebrow">The monthly round‑up</span>
+          <h2>New recipes, straight to your inbox</h2>
+          <p>Once a month I’ll send you a little round‑up of new recipes, family favourites and anything else I think you’ll enjoy. No spam, just good food.</p>
+        </div>
+        <div id="newsWrap">
+          <form id="newsForm" novalidate>
+            <input type="email" id="email" placeholder="Your email address" aria-label="Email address" autocomplete="email">
+            <button class="btn" type="submit">Sign me up</button>
+            <div class="err" id="err" role="alert"></div>
+          </form>
+          <small>One email a month. Unsubscribe anytime.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="index.html" class="brand"><span class="name">Amy Louise Crisp</span><span class="tag">Family recipes you'll actually make</span></a>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3c-2.8 0-4 1.8-4 4.5V11H7v4h3v7h4v-7h3l1-4h-4V8.6c0-.4.3-.6.6-.6z"/></svg></a>
+          <a href="#" aria-label="Pinterest"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.2-2 0-2.9l1.2-5s-.3-.6-.3-1.5c0-1.4.8-2.4 1.8-2.4.9 0 1.3.6 1.3 1.4 0 .9-.5 2.1-.8 3.3-.2 1 .5 1.8 1.5 1.8 1.8 0 3.1-1.9 3.1-4.6 0-2.4-1.7-4.1-4.2-4.1-2.9 0-4.5 2.1-4.5 4.4 0 .9.3 1.8.8 2.3l.1.4-.3 1.1c0 .2-.2.3-.4.2-1.3-.6-2.1-2.5-2.1-4C5.6 8.2 8 5 12.6 5c3.7 0 6.5 2.6 6.5 6.2 0 3.7-2.3 6.6-5.5 6.6-1.1 0-2.1-.6-2.4-1.2l-.7 2.5c-.2.9-.9 2.1-1.3 2.8A10 10 0 1 0 12 2z"/></svg></a>
+          <a href="#" aria-label="YouTube" data-yt-channel><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8c1.6.4 7.8.4 7.8.4s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg></a>
+        </div>
+      </div>
+      <div><h4>Recipes</h4><ul data-cat-links></ul></div>
+      <div><h4>More</h4><ul><li><a href="about.html">About Me</a></li><li><a href="about.html#contact">Contact</a></li><li><a href="#newsletter">Newsletter</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
+    </div>
+    <div class="legal">© 2026 Amy Louise Crisp</div>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="site.js"></script>
+<script src="recipe-card.js"></script>
+<script>
+(() => {
+  const { $, data: D, cat, catUrl, inCat, cardHTML, soonCard, renderRecipe, esc, syncFavs, reveal } = window.ALC;
+  const slug = new URLSearchParams(location.search).get('r');
+  const r = D.recipes.find(x => x.slug === slug) || D.recipes[0];
+  const c = cat(r.categories[0]);
+
+  document.title = r.title + ' · Amy Louise Crisp';
+  $('#crumbs').innerHTML = `<a href="index.html">Home</a> / <a href="recipes.html">Recipes</a> / <a href="${catUrl(c.slug)}">${esc(c.name)}</a> / <span>${esc(r.title)}</span>`;
+  renderRecipe($('#recipe'), r, { h1: true });
+
+  // More from the same category, topped up with "coming soon" cards
+  const others = D.recipes.filter(x => x !== r && x.categories.some(k => r.categories.includes(k))).slice(0, 4);
+  const fill = D.categories.filter(k => k.group === 'main' && !inCat(k.slug).length).slice(0, 4 - others.length);
+  $('#moreTitle').textContent = 'More ' + c.name;
+  $('#moreLink').href = catUrl(c.slug);
+  $('#moreGrid').innerHTML = others.map(x => cardHTML(x, 'reveal')).join('') + fill.map(k => soonCard(k, 'reveal')).join('');
+  syncFavs(); reveal();
+
+  // Recipe details for Google (WP Recipe Maker adds this automatically in WordPress)
+  const iso = m => 'PT' + m + 'M';
+  const ld = { '@context': 'https://schema.org', '@type': 'Recipe', name: r.title, description: r.summary,
+    image: [new URL(r.image, location.href).href], author: { '@type': 'Person', name: 'Amy Louise Crisp' },
+    prepTime: iso(r.prep), cookTime: iso(r.cook), totalTime: iso(r.prep + r.cook), recipeYield: String(r.serves),
+    recipeCategory: r.categories.map(k => cat(k).name),
+    recipeIngredient: r.ingredients.flatMap(g => g.items.map(([q, u, n]) => (q == null ? '' : q + (u ? ' ' + u : '') + ' ') + n)),
+    recipeInstructions: r.method.map(t => ({ '@type': 'HowToStep', text: t })) };
+  if (r.video) ld.video = { '@type': 'VideoObject', name: r.video.title, embedUrl: 'https://www.youtube.com/embed/' + r.video.youtube, thumbnailUrl: new URL(r.image, location.href).href };
+  const s = document.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(ld); document.head.appendChild(s);
+})();
+</script>
+</body>
+</html>
