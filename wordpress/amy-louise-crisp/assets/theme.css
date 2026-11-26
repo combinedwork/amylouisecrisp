@@ -54,3 +54,11 @@ nav#nav .current-menu-item>a,nav#nav .current_page_item>a{border-color:var(--pin
 .entry-content .wp-block-gallery.has-nested-images{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .entry-content .wp-block-gallery.has-nested-images figure.wp-block-image{width:auto!important;margin:0!important}
 @media (max-width:781px){.entry-content .wp-block-gallery.has-nested-images{grid-template-columns:1fr 1fr}}
+
+/* Tablets: keep block-editor columns side by side (WordPress stacks them below 782px) */
+@media (min-width:600px) and (max-width:781px){
+  .entry-content .wp-block-columns:not(.is-not-stacked-on-mobile){flex-wrap:nowrap!important;gap:28px}
+  .entry-content .wp-block-columns>.wp-block-column{flex-basis:0!important;flex-grow:1}
+  .entry-content .wp-block-image.is-style-rounded{max-width:none}
+  .entry-content .wp-block-gallery.has-nested-images{grid-template-columns:repeat(4,1fr)}
+}

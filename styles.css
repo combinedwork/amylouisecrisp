@@ -946,3 +946,115 @@ footer h2.foot-h{font-family:var(--caps);font-size:13px;letter-spacing:.12em;tex
   .cook-nav{padding:6px 12px}
   .cook-nav .btn{min-height:42px;padding:8px}
 }
+
+/* =====================================================================
+   TABLETS & iPADS
+   600–900px  tablet portrait: tablet layout (bottom tab bar kept)
+   901–1100px tablet landscape / small laptops: full layout, menu in the slide-in drawer
+   any touch screen: finger-sized controls
+   ===================================================================== */
+nav#nav a{white-space:nowrap}
+
+/* recipe grids: 3 across on small tablets, 4 across from iPad portrait up */
+@media (min-width:600px) and (max-width:759px){ .grid:not(.list){grid-template-columns:repeat(3,1fr)} }
+@media (min-width:760px) and (max-width:1060px){ .grid:not(.list){grid-template-columns:repeat(4,1fr);gap:20px} }
+
+/* ---------- tablet portrait ---------- */
+@media (min-width:600px) and (max-width:900px) and (min-height:540px){
+  .wrap{padding-left:max(28px,env(safe-area-inset-left));padding-right:max(28px,env(safe-area-inset-right))}
+  section{padding:60px 0}
+  .cats{grid-template-columns:repeat(4,1fr);gap:18px}
+  .cat h3{font-size:19px}
+  .cat p{font-size:14px}
+  .coll-grid{grid-template-columns:repeat(2,1fr);gap:18px}
+  .coll-festive{grid-column:1/-1;min-height:240px}
+  .foot{grid-template-columns:1.3fr 1fr 1fr}
+  .cat-strip{grid-template-columns:repeat(3,1fr)}
+  .card h3{font-size:18px}
+  .page-hero h1{font-size:44px}
+  .toolbar{display:flex}
+  .toolbar .find{flex:1}
+  .cook-body{padding:32px 48px}
+  .cook-body p{font-size:32px}
+  .cook-nav{max-width:720px}
+  .lightbox img{max-width:86vw}
+  .drawer{width:380px}
+}
+@media (min-width:720px) and (max-width:900px) and (min-height:540px){
+  /* side-by-side layouts */
+  .hero{padding:40px 0 56px}
+  .hero-grid{grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+  .hero h1{font-size:38px}
+  .hero p{font-size:16px}
+  .hero .cta .btn{flex:0 1 auto}
+  .hero-img{margin:0 16px 16px 0}
+  .coll-grid{grid-template-columns:1.3fr 1fr 1fr}
+  .coll-festive{grid-column:auto;min-height:0}
+  .coll-festive .coll-body{padding:84px 20px 22px}
+  .coll-festive h3{font-size:26px}
+  .rec{grid-template-columns:.9fr 1.1fr;gap:28px;align-items:start}
+  .rec .ph{position:sticky;top:84px;aspect-ratio:4/5}
+  .facts{grid-template-columns:repeat(2,1fr)}
+  .facts>div:nth-child(2){border-right:0}
+  .facts>div:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .tabbar{position:static;margin:0 0 18px;padding:0;background:none}
+  .video-grid{grid-template-columns:1fr 1.1fr;gap:28px}
+  .video-wrap{order:0}
+  .about-grid{grid-template-columns:.8fr 1.2fr;gap:36px}
+  .about .ph{max-width:none}
+  .news{grid-template-columns:1.1fr 1fr;padding:40px 32px}
+  .about-hero .grid2{grid-template-columns:1.1fr .9fr;gap:32px}
+  .story{grid-template-columns:.9fr 1.1fr;gap:32px}
+  .values{grid-template-columns:repeat(3,1fr);gap:16px}
+  .value{padding:22px}
+  .contact{grid-template-columns:.8fr 1.2fr;gap:32px}
+  .gallery{grid-template-columns:repeat(4,1fr)}
+}
+
+/* ---------- tablet landscape & small laptops: menu moves into the slide-in drawer ---------- */
+@media (min-width:901px) and (max-width:1100px){
+  nav#nav{display:none}
+  .menu-btn{display:grid}
+  .head{gap:12px}
+  .hero-grid{gap:40px}
+}
+
+/* ---------- any touch screen (iPads in landscape get the full layout) ---------- */
+@media (pointer:coarse){
+  nav#nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 2px}
+  .icon-btn{width:44px;height:44px}
+  .tabbar button{min-height:44px}
+  .toolbar select{min-height:44px}
+  .view-toggle button{min-width:44px;min-height:44px}
+  .btn{min-height:44px}
+  input,select,textarea{font-size:16px!important}
+  .cat .ph::after{display:none}          /* hover-only label isn't needed on touch */
+}
+/* tablet portrait refinements */
+@media (min-width:720px) and (max-width:900px) and (min-height:540px){
+  .hero-grid{grid-template-columns:1fr;gap:28px}
+  .hero h1{font-size:46px}
+  .hero p{font-size:17px;max-width:62ch}
+  .hero-img{margin:0 22px 22px 0}
+  .hero-img .frame{aspect-ratio:16/9}
+  .coll-grid{grid-template-columns:repeat(2,1fr)}
+  .coll-festive{grid-column:1/-1;min-height:220px}
+  .coll-festive .coll-body{padding:28px 28px 26px;padding-right:120px}
+  .coll-festive .season-badge{position:static;align-self:flex-start;margin:0 0 6px}
+  .coll-festive .coll-body{order:2}
+  .festive-mark{font-size:70px;right:28px;top:50%;transform:translateY(-50%)}
+  .coll-festive:hover .festive-mark{transform:translateY(-50%) rotate(-8deg)}
+  .t-full{display:none}.t-short{display:inline}
+  .video-cta .btn{flex:0 1 auto}
+}
+@media (min-width:720px) and (max-width:900px) and (min-height:540px){ .coll-festive .season-badge{margin:24px 0 0 28px} }
+/* wide but short screens (e.g. Android tablets in landscape) */
+@media (min-width:901px) and (max-height:700px){
+  .cook-body{padding-top:14px;padding-bottom:14px}
+  .cook-body .n{margin-bottom:6px}
+  .cook-body p{font-size:26px;line-height:1.3}
+  .cook-ings{margin-top:12px}
+  .timer{margin-top:14px}
+  .swipe-hint{display:none!important}
+  .cook-nav{padding-top:10px;padding-bottom:max(12px,env(safe-area-inset-bottom))}
+}
