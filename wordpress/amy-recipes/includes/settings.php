@@ -37,11 +37,11 @@ function alc_get_season() {
 }
 
 add_action( 'admin_menu', function () {
-	add_submenu_page( 'edit.php?post_type=recipe', 'Festive Season & Moods', 'Festive Season & Moods', 'edit_posts', 'alc-season', 'alc_settings_page' );
+	add_submenu_page( 'edit.php?post_type=recipe', 'Festive Season & Moods', 'Festive Season & Moods', 'edit_others_posts', 'alc-season', 'alc_settings_page' );
 } );
 
 function alc_settings_page() {
-	if ( isset( $_POST['alc_settings_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['alc_settings_nonce'] ) ), 'alc_settings' ) && current_user_can( 'edit_posts' ) ) {
+	if ( isset( $_POST['alc_settings_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['alc_settings_nonce'] ) ), 'alc_settings' ) && current_user_can( 'edit_others_posts' ) ) {
 		update_option( 'alc_season', array(
 			'name'    => sanitize_text_field( wp_unslash( $_POST['season_name'] ?? '' ) ),
 			'heading' => sanitize_text_field( wp_unslash( $_POST['season_heading'] ?? '' ) ),

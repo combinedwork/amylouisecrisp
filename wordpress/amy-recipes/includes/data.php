@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function alc_recipe_data( $post ) {
+function alc_recipe_data( $post, $full = true ) {
 	$post    = get_post( $post );
 	$meta    = function ( $k ) use ( $post ) {
 		return get_post_meta( $post->ID, $k, true );
@@ -40,7 +40,7 @@ function alc_recipe_data( $post ) {
 	$yt      = alc_youtube_id( $meta( 'alc_video' ) );
 	$ing     = alc_parse_ingredients( $meta( 'alc_ingredients' ) );
 	$summary = $meta( 'alc_summary' );
-	return array(
+	$data = array(
 		'slug'        => $post->post_name,
 		'url'         => get_permalink( $post ),
 		'title'       => get_the_title( $post ),
@@ -59,6 +59,22 @@ function alc_recipe_data( $post ) {
 		'video'       => $yt ? array( 'youtube' => $yt, 'title' => $meta( 'alc_video_title' ) ? $meta( 'alc_video_title' ) : get_the_title( $post ) ) : null,
 		'keywords'    => (string) $meta( 'alc_keywords' ),
 	);
+	if ( ! $full ) {
+		// Cards, search and the mood picker only need the basics; ingredient names go into the
+		// search words so recipes can still be found by ingredient.
+		$names            = array();
+		foreach ( $ing as $g ) {
+			foreach ( $g['items'] as $it ) {
+				$names[] = $it[2];
+			}
+		}
+		$data['keywords'] = trim( $data['keywords'] . ' ' . implode( ' ', $names ) );
+		$data['ingredients'] = array();
+		$data['method']      = array();
+		$data['tips']        = array();
+		$data['timers']      = (object) array();
+	}
+	return $data;
 }
 
 function alc_collections_data() {
@@ -100,7 +116,10 @@ function alc_site_data( $current = null ) {
 		'youtubeChannel' => (string) ( function_exists( 'alc_mod' ) ? alc_mod( 'alc_youtube' ) : get_theme_mod( 'alc_youtube', '' ) ),
 		'categories'     => alc_collections_data(),
 		'moods'          => alc_get_moods(),
-		'recipes'        => array_map( 'alc_recipe_data', $posts ),
+		'recipes'        => array_map( function ( $p ) use ( $current, $posts ) {
+			// The page's own recipe and the newest one (homepage card) get every detail
+			return alc_recipe_data( $p, $p->post_name === $current || $p === $posts[0] );
+		}, $posts ),
 		'links'          => array(
 			'home'    => home_url( '/' ),
 			'recipes' => get_post_type_archive_link( 'recipe' ),
@@ -157,5 +176,5 @@ add_action( 'wp_head', function () {
 			'uploadDate'   => get_the_date( 'c' ),
 		);
 	}
-	echo '<script type="application/ld+json">' . wp_json_encode( $ld, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . "</script>\n";
+	echo '<script type="application/ld+json">' . wp_json_encode( $ld, JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE ) . "</script>\n";
 } );

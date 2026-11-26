@@ -59,7 +59,9 @@ function alc_parse_ingredients( $text ) {
 			$current = array( 'group' => trim( mb_substr( $line, 0, -1 ) ), 'items' => array() );
 			continue;
 		}
-		if ( preg_match( '/^(' . $num . ')\s*(?:(' . alc_units() . ')\b\.?)?\s*(.+)$/iu', $line, $m ) ) {
+		// Ranges like "2-3 garlic cloves" or "1 to 2 tbsp" are kept exactly as written.
+		$is_range = preg_match( '/^\d+(?:[.,]\d+)?\s*(?:-|–|to)\s*\d/iu', $line );
+		if ( ! $is_range && preg_match( '/^(' . $num . ')\s*(?:(' . alc_units() . ')\b\.?)?\s*(.+)$/iu', $line, $m ) ) {
 			$amount = alc_parse_number( $m[1] );
 			$unit   = isset( $m[2] ) ? strtolower( $m[2] ) : '';
 			$name   = trim( $m[3] );
@@ -82,7 +84,8 @@ function alc_parse_method( $text ) {
 	$timers = array();
 	foreach ( preg_split( '/\r\n|\r|\n/', (string) $text ) as $line ) {
 		$line = trim( $line );
-		$line = preg_replace( '/^(?:step\s*)?\d+\s*[\.\):\-]\s*/i', '', $line );
+		// Remove numbering like "1." "2)" "Step 3:" (but not "1-2 minutes")
+		$line = preg_replace( '/^(?:step\s*)?\d+\s*(?:[\.\)]|:(?!\d))\s*/i', '', $line );
 		if ( '' === $line ) {
 			continue;
 		}
@@ -108,7 +111,8 @@ function alc_parse_tips( $text ) {
 			continue;
 		}
 		$parts  = explode( ':', $line, 2 );
-		$tips[] = ( 2 === count( $parts ) && mb_strlen( $parts[0] ) <= 40 ) ? array( trim( $parts[0] ), trim( $parts[1] ) ) : array( 'Tip', $line );
+		$is_heading = 2 === count( $parts ) && mb_strlen( $parts[0] ) <= 40 && 0 !== strpos( $parts[1], '//' );
+		$tips[]     = $is_heading ? array( trim( $parts[0] ), trim( $parts[1] ) ) : array( 'Tip', $line );
 	}
 	return $tips;
 }

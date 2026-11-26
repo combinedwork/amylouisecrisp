@@ -818,3 +818,33 @@ footer .brand-logo--full img{height:auto;width:220px}
 .ad-slot:empty{display:none}
 .ad-slot--preview{display:grid;place-items:center;gap:2px;min-height:120px;border:2px dashed var(--sage);border-radius:12px;background:repeating-linear-gradient(135deg,var(--sage-xl) 0 12px,#fff 12px 24px);color:var(--sage-dd);font-family:var(--caps);text-transform:uppercase;letter-spacing:.12em;font-size:13px;padding:16px}
 .ad-slot--preview small{text-transform:none;letter-spacing:0;font-family:Lato,sans-serif;font-size:13px;color:var(--muted)}
+
+/* ---------- QA fixes ---------- */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+footer h2.foot-h{font-family:var(--caps);font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 12px;color:var(--ink);font-weight:600}
+.about-hero h1 em{color:var(--sage-d);background:linear-gradient(transparent 62%,var(--pink-l) 62%);padding:0 .08em}
+
+/* Printing a recipe: just the recipe, with ingredients, method and tips all shown */
+@media print{
+  header,footer,.tabbar-m,.drawer,.drawer-bg,.top-btn,.toast,.mock-badge,.picker,.hero,.collections,#categories,#latest,.about,#newsletter,#video,#more,.ad-slot,
+  .actions,.tabbar,.stepper button,.progress-note,.recipe-top,.page-hero,.toolbar,.filters,.cook,.overlay,.heart,[data-panel="video"]{display:none!important}
+  body{background:#fff;color:#000;font-size:12pt;padding:0}
+  .featured,.recipe-page{background:#fff!important;padding:0!important}
+  .rec{display:block!important}
+  .rec .ph{position:static!important;max-width:60%;aspect-ratio:auto;margin-bottom:12px}
+  .reveal{opacity:1!important;transform:none!important}
+  .panel{display:block!important;margin-bottom:14px}
+  .panel[data-panel="method"]::before{content:"Method";display:block;font:600 18pt var(--display);margin:10px 0}
+  .panel[data-panel="tips"]::before{content:"Tips & storage";display:block;font:600 18pt var(--display);margin:10px 0}
+  .ing input{display:none}
+  details.tip{border:0;padding:0}
+  details.tip>p{display:block!important}
+  .steps li{break-inside:avoid}
+  .panel,.panel.on{animation:none!important;opacity:1!important}
+  .panel[data-panel="video"]{display:none!important}
+  .steps li.done{opacity:1}
+  details.tip summary::after{display:none}
+  a{color:#000;text-decoration:none}
+}
+
+.step-timer{display:table;margin-top:6px}

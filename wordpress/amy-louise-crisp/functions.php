@@ -67,7 +67,7 @@ add_action( 'wp_enqueue_scripts', function () {
 	}
 	$current = is_singular( 'recipe' ) ? get_queried_object()->post_name : null;
 	wp_register_script( 'alc-site', $uri . 'site.js', array(), $v, true );
-	wp_add_inline_script( 'alc-site', 'window.ALC_DATA = ' . wp_json_encode( alc_site_data( $current ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . ';', 'before' );
+	wp_add_inline_script( 'alc-site', 'window.ALC_DATA = ' . wp_json_encode( alc_site_data( $current ), JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE ) . ';', 'before' );
 	wp_enqueue_script( 'alc-site' );
 	if ( is_front_page() || is_singular( 'recipe' ) ) {
 		wp_enqueue_script( 'alc-recipe-card', $uri . 'recipe-card.js', array( 'alc-site' ), $v, true );

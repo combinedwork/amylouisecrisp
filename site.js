@@ -19,12 +19,12 @@
   const inCat = slug => D.recipes.filter(r => r.categories.includes(slug));
   const time = m => m>=60 ? (m%60 ? `${Math.floor(m/60)} hr ${m%60} mins` : `${m/60} hr${m>=120?'s':''}`) : `${m} mins`;
   const heartSvg = '<svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>';
-  const catThumb = c => c.image ? `<img src="${c.image}" alt="" style="object-position:${c.pos||'50% 50%'}">` : c.seasonal ? `<span class="festive-art" aria-hidden="true">${D.season.emoji||'✨'}</span>` : `<span class="festive-art plain" aria-hidden="true">${esc(c.name.charAt(0))}</span>`;
+  const catThumb = c => c.image ? `<img src="${esc(c.image)}" alt="" style="object-position:${c.pos||'50% 50%'}">` : c.seasonal ? `<span class="festive-art" aria-hidden="true">${D.season.emoji||'✨'}</span>` : `<span class="festive-art plain" aria-hidden="true">${esc(c.name.charAt(0))}</span>`;
   const cardHTML = (r, extra='') => {
     const c = cat(r.categories[0]) || { name: 'Recipe' };
     return `<div class="card ${extra}" data-id="${r.slug}" data-cats="${r.categories.join(' ')}">
       <button class="heart" aria-label="Save ${esc(r.title)}">${heartSvg}</button>
-      <a href="${recipeUrl(r)}"><div class="ph">${r.image ? `<img src="${r.image}" alt="${esc(r.title)}" style="object-position:${r.imagePos||'50% 50%'}" loading="lazy">` : `<span class="festive-art plain" aria-hidden="true">${esc(r.title.charAt(0))}</span>`}${r.isNew?'<span class="badge">New</span>':''}</div>
+      <a href="${esc(recipeUrl(r))}"><div class="ph">${r.image ? `<img src="${esc(r.image)}" alt="${esc(r.title)}" style="object-position:${r.imagePos||'50% 50%'}" loading="lazy">` : `<span class="festive-art plain" aria-hidden="true">${esc(r.title.charAt(0))}</span>`}${r.isNew?'<span class="badge">New</span>':''}</div>
       <span class="label">${esc(c.name)}</span><h3>${esc(r.title)}</h3><span class="meta">${time(r.prep+r.cook)} · Serves ${r.serves}</span>
       <span class="desc">${esc(r.summary)}</span></a></div>`;
   };
@@ -77,10 +77,13 @@
     </nav>`);
   const setDrawer = open => {
     document.body.classList.toggle('drawer-open', open);
-    $('#drawer').setAttribute('aria-hidden', !open);
+    const dr = $('#drawer');
+    dr.setAttribute('aria-hidden', !open);
+    dr.inert = !open;  // closed menu can't be tabbed into
     $('#menuBtn').setAttribute('aria-expanded', open);
     if (open) $('#drawerClose').focus();
   };
+  $('#drawer').inert = true;
   $('#menuBtn').onclick = () => setDrawer(true);
   $('#drawerClose').onclick = () => setDrawer(false);
   $('#drawerBg').onclick = () => setDrawer(false);
@@ -172,7 +175,7 @@
   $('#searchOv').onclick = e => { if(e.target.id==='searchOv' || e.target.closest('[data-close]')) closeSearch(); };
   document.addEventListener('keydown', e => {
     if(e.key==='Escape'){ closeSearch(); setDrawer(false); }
-    if(e.key==='/' && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){ e.preventDefault(); openSearch(); }
+    if(e.key==='/' && !document.body.classList.contains('lock') && !document.body.classList.contains('drawer-open') && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){ e.preventDefault(); openSearch(); }
   });
 
   /* newsletter */

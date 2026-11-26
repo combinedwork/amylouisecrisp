@@ -18,6 +18,7 @@
     // counted things (eggs, onions, sausages) round to whole numbers once there's at least one
     if (!u && v >= 1) return Math.round(v) + ' ';
     return fr(Math.max(.25, Math.round(v * 4) / 4)) + (u ? ' ' + u : '') + ' '; };
+  const timerLabel = m => m >= 60 ? (m % 60 ? `${Math.floor(m / 60)} hr ${m % 60} min` : `${m / 60} hr`) : `${m} min`;
   const play = s => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>`;
 
   /* ---------- video players (load only when played) ---------- */
@@ -25,7 +26,7 @@
   const openOnYouTube = id => { const a = document.createElement('a'); a.href = 'https://youtu.be/' + id; a.target = '_blank'; a.rel = 'noopener'; document.body.appendChild(a); a.click(); a.remove(); };
   const posterHTML = (v, img, pos, label, sub, size) => `
     <button class="video-poster" aria-label="Play video: ${esc(v.title)}">
-      <img src="${img}" alt="" style="object-position:${pos || '50% 50%'}">
+      <img src="${esc(img || '')}" alt="" style="object-position:${esc(pos || '50% 50%')}">
       <span class="play">${play(size || 26)}</span>
       <span class="video-label"><b>${esc(label)}</b><small>${esc(framed ? 'Opens on YouTube ↗' : sub)}</small></span>
     </button>`;
@@ -104,11 +105,13 @@
     $('#cookBar').style.width = ((cur + 1) / steps.length * 100) + '%';
     $('#prev').disabled = cur === 0;
     $('#next').textContent = cur === steps.length - 1 ? 'Finish 🎉' : 'Next step →';
-    tStop(); secs = stepTimer(cur); $('#timer').classList.remove('ring'); tShow();
+    // Keep a running timer going between steps; otherwise load this step's suggested time
+    if (!run) { secs = stepTimer(cur); $('#timer').classList.remove('ring'); tShow(); }
+    $('#timer').classList.toggle('has-preset', !!stepTimer(cur));
   };
   const isCook = () => $('#cook').classList.contains('open');
   const openCook = (recipe, serves) => { R = recipe; steps = recipe.method; servesNow = serves || recipe.serves; cur = 0;
-    $('#cookTitle').textContent = recipe.title; mapIngredients(); showStep();
+    $('#cookTitle').textContent = recipe.title; mapIngredients(); tStop(); secs = 0; showStep();
     $('#cook').classList.add('open'); document.body.classList.add('lock'); $('#next').focus(); };
   const closeCook = () => { tStop(); $('#cook').classList.remove('open'); document.body.classList.remove('lock');
     if (wl) { wl.release().catch(() => {}); wl = null; $('#wake').checked = false; } };
@@ -123,6 +126,12 @@
     if (e.target.checked) { try { wl = await navigator.wakeLock.request('screen'); toast('Screen will stay on'); } catch (err) { e.target.checked = false; toast('Not supported on this device'); } }
     else if (wl) { wl.release().catch(() => {}); wl = null; }
   };
+  // The phone drops "keep screen on" when you switch apps; turn it back on when you return
+  document.addEventListener('visibilitychange', async () => {
+    if (document.visibilityState === 'visible' && isCook() && $('#wake').checked) {
+      try { wl = await navigator.wakeLock.request('screen'); } catch (err) { $('#wake').checked = false; }
+    }
+  });
   document.addEventListener('keydown', e => {
     if (!isCook()) return;
     if (e.key === 'Escape') closeCook(); if (e.key === 'ArrowRight') $('#next').click(); if (e.key === 'ArrowLeft') $('#prev').click();
@@ -135,7 +144,7 @@
     const H = opts.h1 ? 'h1' : 'h2';
     host.innerHTML = `
     <div class="wrap rec">
-      <div class="ph reveal">${r.image ? `<img src="${r.image}" alt="${esc(r.title)}" style="object-position:${r.imagePos || '50% 50%'}">` : `<span class="festive-art plain" aria-hidden="true">${esc(r.title.charAt(0))}</span>`}</div>
+      <div class="ph reveal">${r.image ? `<img src="${esc(r.image)}" alt="${esc(r.title)}" style="object-position:${r.imagePos || '50% 50%'}">` : `<span class="festive-art plain" aria-hidden="true">${esc(r.title.charAt(0))}</span>`}</div>
       <div class="reveal">
         <span class="eyebrow">${esc(opts.eyebrow || cats.map(c => c.name).join(' · '))}</span>
         <${H}>${esc(r.title)}</${H}>
@@ -159,7 +168,7 @@
         </div>
         <div class="panel on" data-panel="ing"><div class="ing-list"></div><div class="progress-note ing-note"></div></div>
         <div class="panel" data-panel="method">
-          <ol class="steps">${r.method.map((s, i) => `<li tabindex="0">${esc(s)}${(r.timers || {})[i + 1] ? `<span class="step-timer">⏱ ${r.timers[i + 1]} min timer in Cook Mode</span>` : ''}</li>`).join('')}</ol>
+          <ol class="steps">${r.method.map((s, i) => `<li tabindex="0"><span>${esc(s)}${(r.timers || {})[i + 1] ? `<span class="step-timer">⏱ ${timerLabel(r.timers[i + 1])} timer in Cook Mode</span>` : ''}</span></li>`).join('')}</ol>
           <div class="progress-note">Tap a step to mark it done, or use <a href="#" class="open-cook">Cook Mode</a> to follow one step at a time.</div>
         </div>
         ${r.video ? `<div class="panel" data-panel="video">
@@ -196,6 +205,11 @@
     sb.onclick = () => toggleFav(r.slug); onFavs(syncSave); syncSave();
     bindVideos(host); window.ALC.reveal(host);
   };
+
+  // Printing: open every tip so the whole recipe prints, then put them back
+  let printOpened = [];
+  addEventListener('beforeprint', () => { printOpened = $$('details.tip:not([open])'); printOpened.forEach(el => { el.open = true; }); });
+  addEventListener('afterprint', () => { printOpened.forEach(el => { el.open = false; }); printOpened = []; });
 
   Object.assign(window.ALC, { renderRecipe, openCook, bindVideos, posterHTML });
 })();

@@ -28,6 +28,7 @@ get_header();
       </div>
       <div class="filters" id="filters"></div>
       <div class="cat-intro" id="catIntro"><div class="th" id="ciTh"></div><div><h3 id="ciTitle"></h3><p id="ciText"></p></div></div>
+      <h2 class="sr-only">Recipes</h2>
       <p class="result-count" id="count" aria-live="polite"></p>
       <div class="grid" id="grid">
         <?php /* Plain list for search engines and if JavaScript is off; replaced by the interactive grid. */
