@@ -35,6 +35,7 @@ get_header();
           <div class="card in"><a href="<?php the_permalink(); ?>"><div class="ph"><?php the_post_thumbnail( 'large' ); ?></div><h3><?php the_title(); ?></h3></a></div>
         <?php endwhile; endif; ?>
       </div>
+      <?php alc_ad( 'recipes_list' ); ?>
       <div class="empty" id="empty"><b class="serif" style="font-size:22px">Nothing here yet</b><p style="margin:6px 0 12px" id="emptyText"></p><button class="btn" id="clearBtn">Show all recipes</button></div>
     </div>
   </section>

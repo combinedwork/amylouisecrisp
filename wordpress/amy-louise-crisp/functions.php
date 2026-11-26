@@ -12,6 +12,7 @@ define( 'ALC_THEME_VERSION', '1.0.0' );
 
 require get_template_directory() . '/inc/customizer.php';
 require get_template_directory() . '/inc/setup.php';
+require get_template_directory() . '/inc/ads.php';
 
 add_action( 'after_setup_theme', function () {
 	add_theme_support( 'title-tag' );
@@ -86,6 +87,9 @@ add_action( 'wp_enqueue_scripts', function () {
 add_action( 'wp_head', function () {
 	$font = get_theme_mod( 'alc_font_file' );
 	echo '<meta name="theme-color" content="#f8f5ef">' . "\n";
+	if ( ! has_site_icon() ) {
+		printf( '<link rel="icon" href="%s" sizes="32x32">' . "\n" . '<link rel="icon" href="%s" sizes="512x512">' . "\n" . '<link rel="apple-touch-icon" href="%s">' . "\n", esc_url( alc_theme_img( 'logo/favicon-32.png' ) ), esc_url( alc_theme_img( 'logo/favicon.png' ) ), esc_url( alc_theme_img( 'logo/apple-touch-icon.png' ) ) );
+	}
 	if ( $font ) {
 		$ext    = strtolower( pathinfo( wp_parse_url( $font, PHP_URL_PATH ), PATHINFO_EXTENSION ) );
 		$format = array( 'woff2' => 'woff2', 'woff' => 'woff', 'otf' => 'opentype', 'ttf' => 'truetype' );

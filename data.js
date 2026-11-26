@@ -20,7 +20,7 @@ window.ALC_DATA = {
     emoji: '🎄'
   },
 
-  youtubeChannel: '',   // add Amy's channel link here, e.g. https://www.youtube.com/@yourchannel
+  youtubeChannel: 'https://www.youtube.com/channel/UCjtX0o8ZOkc6L4hd2mzneVA',
 
   /* ---- Categories -------------------------------------------------------
      group "main" = the four "Find Something Delicious" tiles

@@ -1,5 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) { exit; }
+echo '<div class="wrap">'; alc_ad( 'above_footer' ); echo '</div>';
 get_template_part( 'template-parts/newsletter' );
 $icons = array(
 	'alc_instagram' => array( 'Instagram', '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>' ),
@@ -14,7 +15,7 @@ $icons = array(
   <div class="wrap">
     <div class="foot">
       <div>
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="brand"><span class="name"><?php bloginfo( 'name' ); ?></span><span class="tag"><?php bloginfo( 'description' ); ?></span></a>
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="brand brand-logo brand-logo--full"><img src="<?php echo esc_url( alc_mod( 'footer_logo' ) ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>" loading="lazy"></a>
         <div class="socials">
           <?php foreach ( $icons as $key => $ic ) : $url = alc_mod( $key ); if ( ! $url ) { continue; } ?>
             <a href="<?php echo esc_url( $url ); ?>" aria-label="<?php echo esc_attr( $ic[0] ); ?>" target="_blank" rel="noopener"><?php echo $ic[1]; // phpcs:ignore ?></a>

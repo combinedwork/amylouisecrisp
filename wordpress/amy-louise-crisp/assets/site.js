@@ -38,6 +38,8 @@
     return `<a href="${catUrl(c.slug)}" class="reveal"><span class="th${c.image?'':' festive-th'}">${catThumb(c)}</span><span><b>${esc(c.name)}</b><small>${c.seasonal ? esc(D.season.name)+' · ' : ''}${n ? n+' recipe'+(n>1?'s':'') : 'Coming soon'}</small></span></a>`;
   }).join(''));
 
+  // Mock-up only: add ?ads=preview to the address to see where adverts could go
+  if (!D.links && /[?&]ads=preview/.test(location.search)) document.querySelectorAll('.ad-slot[data-ad]').forEach(el => { el.classList.add('ad-slot--preview'); el.innerHTML = '<span>Advert space</span><small>' + esc(el.dataset.ad) + '</small>'; });
   document.querySelectorAll('[data-yt-channel]').forEach(a => { if (D.youtubeChannel) { a.href = D.youtubeChannel; a.target = '_blank'; a.rel = 'noopener'; } });
 
   /* toast + back to top (injected) */

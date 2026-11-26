@@ -26,6 +26,7 @@ function alc_links() {
 		'logo'     => array( '✨ Logo, fonts & site name', $customize( 'title_tagline' ) ),
 		'menu'     => array( '🧭 Menus', admin_url( 'nav-menus.php' ) ),
 		'media'    => array( '📷 All my photos', admin_url( 'upload.php' ) ),
+		'ads'      => array( '💷 Advertising', $customize( 'alc_ads' ) ),
 		'guide'    => array( '❓ Website guide', admin_url( 'admin.php?page=alc-guide' ) ),
 	);
 }
@@ -115,6 +116,11 @@ function alc_guide_page() {
 				<li><strong>Social links:</strong> <?php echo $a( 'social' ); // phpcs:ignore ?>.</li>
 				<li><strong>Other pages</strong> (Privacy Policy, Contact…): Pages → Add New, then add them to a menu.</li>
 			</ul>
+		</div>
+
+		<div class="alc-card">
+			<h2>💷 Advertising (when you’re ready)</h2>
+			<p>Nothing shows until you switch it on. When an ad network (e.g. Mediavine, Raptive or Google AdSense) accepts you, go to <?php echo $a( 'ads' ); // phpcs:ignore ?>, paste their <strong>head code</strong> and <strong>ads.txt</strong> lines, tick <strong>Turn on adverts</strong> and click <em>Publish</em>. To see where the optional ad spaces are, add <code>?ads=preview</code> to the end of any page address while logged in. Cook Mode never shows adverts. Remember a cookie consent banner (most networks provide one).</p>
 		</div>
 
 		<div class="alc-card">

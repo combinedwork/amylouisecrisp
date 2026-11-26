@@ -13,7 +13,7 @@
     <?php if ( has_custom_logo() ) : ?>
       <div class="brand brand-logo"><?php the_custom_logo(); ?></div>
     <?php else : ?>
-      <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="brand" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?> home"><span class="name"><?php bloginfo( 'name' ); ?></span><?php if ( get_bloginfo( 'description' ) ) : ?><span class="tag"><?php bloginfo( 'description' ); ?></span><?php endif; ?></a>
+      <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="brand brand-logo" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?> home"><img src="<?php echo esc_url( alc_theme_img( 'logo/logo-wordmark.png' ) ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) . ' – ' . get_bloginfo( 'description' ) ); ?>" width="1152" height="240"></a>
     <?php endif; ?>
     <nav id="nav" aria-label="Main menu">
       <?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'items_wrap' => '<ul>%3$s</ul>', 'fallback_cb' => 'alc_menu_fallback', 'depth' => 1 ) ); ?>

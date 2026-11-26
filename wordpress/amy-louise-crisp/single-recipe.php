@@ -11,8 +11,26 @@ $first = $terms && ! is_wp_error( $terms ) ? $terms[0] : null;
   </div>
 
   <section class="featured recipe-page" id="recipe">
-    <div class="wrap"><h1><?php the_title(); ?></h1><p><?php echo esc_html( get_post_meta( get_the_ID(), 'alc_summary', true ) ); ?></p></div>
+    <?php $r = function_exists( 'alc_recipe_data' ) ? alc_recipe_data( get_the_ID() ) : null; ?>
+    <div class="wrap recipe-static">
+      <h1><?php the_title(); ?></h1>
+      <?php if ( $r ) : ?>
+        <?php if ( $r['image'] ) : ?><img src="<?php echo esc_url( $r['image'] ); ?>" alt="<?php the_title_attribute(); ?>" style="max-width:520px;border-radius:10px"><?php endif; ?>
+        <p><?php echo esc_html( $r['summary'] ); ?></p>
+        <p>Prep <?php echo (int) $r['prep']; ?> mins · Cook <?php echo (int) $r['cook']; ?> mins · Serves <?php echo (int) $r['serves']; ?></p>
+        <h2>Ingredients</h2>
+        <?php foreach ( $r['ingredients'] as $g ) : ?>
+          <?php if ( $g['group'] ) : ?><h3><?php echo esc_html( $g['group'] ); ?></h3><?php endif; ?>
+          <ul><?php foreach ( $g['items'] as $it ) : ?><li><?php echo esc_html( trim( ( null === $it[0] ? '' : rtrim( rtrim( number_format( $it[0], 2, '.', '' ), '0' ), '.' ) . ( $it[1] ? ( in_array( $it[1], array( 'g', 'ml', 'kg', 'l' ), true ) ? '' : ' ' ) . $it[1] : '' ) . ' ' ) . $it[2] ) ); ?></li><?php endforeach; ?></ul>
+        <?php endforeach; ?>
+        <h2>Method</h2>
+        <ol><?php foreach ( $r['method'] as $s ) : ?><li><?php echo esc_html( $s ); ?></li><?php endforeach; ?></ol>
+        <?php if ( $r['tips'] ) : ?><h2>Tips &amp; storage</h2><?php foreach ( $r['tips'] as $t ) : ?><p><strong><?php echo esc_html( $t[0] ); ?>:</strong> <?php echo esc_html( $t[1] ); ?></p><?php endforeach; ?><?php endif; ?>
+      <?php endif; ?>
+    </div>
   </section>
+
+  <div class="wrap"><?php alc_ad( 'recipe_after' ); ?></div>
 
   <section id="more">
     <div class="wrap">
@@ -20,5 +38,6 @@ $first = $terms && ! is_wp_error( $terms ) ? $terms[0] : null;
       <div class="grid" id="moreGrid"></div>
     </div>
   </section>
+  <div class="wrap"><?php alc_ad( 'recipe_more' ); ?></div>
 <?php
 get_footer();

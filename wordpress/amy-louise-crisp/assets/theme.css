@@ -1,11 +1,9 @@
 /* WordPress-specific styles (menus, logo, pages built in the block editor) */
 .skip-link{position:absolute;left:-9999px;top:8px;z-index:100;background:#fff;padding:8px 14px;border-radius:6px}
 .skip-link:focus{left:8px}
+.brand-logo .custom-logo-link{display:block;line-height:0}
 nav#nav .current-menu-item>a,nav#nav .current_page_item>a{border-color:var(--pink);color:var(--ink)}
 .drawer .current-menu-item>a,.drawer .current_page_item>a{color:var(--sage-dd);font-weight:700;background:var(--sage-xl);box-shadow:inset 3px 0 0 var(--pink)}
-.brand-logo img{max-height:64px;width:auto;height:auto;object-fit:contain;display:block}
-header.scrolled .brand-logo img{max-height:48px}
-footer .brand-logo img{max-height:70px}
 .page-hero--slim{padding:40px 0 34px}
 .page-body{padding-top:48px}
 .pager{margin-top:32px}

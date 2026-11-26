@@ -10,10 +10,13 @@ get_header();
 
 $latest = post_type_exists( 'recipe' ) ? get_posts( array( 'post_type' => 'recipe', 'numberposts' => 1 ) ) : array();
 $latest = $latest ? $latest[0] : null;
+$mins   = $latest ? (int) get_post_meta( $latest->ID, 'alc_prep', true ) + (int) get_post_meta( $latest->ID, 'alc_cook', true ) : 0;
+/** 20 → "20 mins", 375 → "6 hr 15 mins" */
+$human  = $mins >= 60 ? floor( $mins / 60 ) . ' hr' . ( $mins % 60 ? ' ' . ( $mins % 60 ) . ' mins' : ( $mins >= 120 ? 's' : '' ) ) : $mins . ' mins';
 
 // Slides: anything left blank falls back to something sensible
 $auto = array(
-	1 => array( 'title' => $latest ? get_the_title( $latest ) : 'Recipes', 'sub' => $latest ? 'New recipe · ready in ' . ( (int) get_post_meta( $latest->ID, 'alc_prep', true ) + (int) get_post_meta( $latest->ID, 'alc_cook', true ) ) . ' mins' : 'Family recipes you’ll actually make', 'link' => $latest ? get_permalink( $latest ) : alc_recipes_url(), 'dot' => $latest ? (string) ( (int) get_post_meta( $latest->ID, 'alc_prep', true ) + (int) get_post_meta( $latest->ID, 'alc_cook', true ) ) : '' ),
+	1 => array( 'title' => $latest ? get_the_title( $latest ) : 'Recipes', 'sub' => $latest ? 'New recipe · ready in ' . $human : 'Family recipes you’ll actually make', 'link' => $latest ? get_permalink( $latest ) : alc_recipes_url(), 'dot' => $mins ? ( $mins >= 100 ? round( $mins / 60 ) . 'h' : (string) $mins ) : '' ),
 	2 => array( 'link' => alc_recipes_url( 'fakeaways' ) ),
 	3 => array( 'link' => alc_recipes_url( 'baking' ) ),
 	4 => array( 'link' => alc_about_url() ),
@@ -92,6 +95,8 @@ $vlink   = $vrecipe && get_post( $vrecipe ) ? get_permalink( $vrecipe ) : ( $lat
     </div>
   </section>
 
+  <div class="wrap"><?php alc_ad( 'home_1' ); ?></div>
+
   <section class="featured" id="recipe"></section>
 
   <?php if ( alc_mod( 'video_show' ) && $yt ) : ?>
@@ -126,6 +131,8 @@ $vlink   = $vrecipe && get_post( $vrecipe ) ? get_permalink( $vrecipe ) : ( $lat
       <div class="grid" id="grid"></div>
     </div>
   </section>
+
+  <div class="wrap"><?php alc_ad( 'home_2' ); ?></div>
 
   <section class="about" id="about">
     <div class="wrap about-grid">

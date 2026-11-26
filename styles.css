@@ -803,3 +803,18 @@ nav#nav a:hover,nav#nav a.on{border-color:var(--pink);color:var(--ink)}
 @media (max-width:520px){.coll-festive .coll-body{padding:84px 22px 24px}.coll-festive{min-height:0}}
 .festive-art.plain{background:linear-gradient(135deg,var(--sage-xl),#fff 60%,var(--sage-l));font-family:var(--display);color:var(--sage-d);font-size:72px}
 .festive-th .festive-art.plain{font-size:24px}
+
+/* ---------- logo ---------- */
+.brand-logo{display:block;line-height:0}
+.brand-logo img{height:52px;width:auto;display:block;transition:height .3s}
+header.scrolled .brand-logo img{height:42px}
+footer .brand-logo--full img{height:auto;width:220px}
+.drawer-head .brand-logo img{height:34px}
+@media (max-width:900px){.brand-logo img{height:40px} header.scrolled .brand-logo img{height:34px}}
+@media (max-width:380px){.brand-logo img{height:34px}}
+
+/* ad spaces: invisible until adverts are switched on */
+.ad-slot{margin:32px auto;text-align:center;max-width:100%;overflow:hidden;min-height:0}
+.ad-slot:empty{display:none}
+.ad-slot--preview{display:grid;place-items:center;gap:2px;min-height:120px;border:2px dashed var(--sage);border-radius:12px;background:repeating-linear-gradient(135deg,var(--sage-xl) 0 12px,#fff 12px 24px);color:var(--sage-dd);font-family:var(--caps);text-transform:uppercase;letter-spacing:.12em;font-size:13px;padding:16px}
+.ad-slot--preview small{text-transform:none;letter-spacing:0;font-family:Lato,sans-serif;font-size:13px;color:var(--muted)}

@@ -26,6 +26,7 @@ This repository has two things:
 - [Menus](#menus)
 - [Newsletter sign-up](#newsletter-sign-up)
 - [Logo, site name, The Seasons font and social links](#logo-site-name-the-seasons-font-and-social-links)
+- [Advertising (for later)](#advertising-for-later)
 - [If something goes wrong](#if-something-goes-wrong)
 - [For developers](#for-developers)
 
@@ -165,144 +166,66 @@ slideshow; square photos for collections and the About photo.
 | Homepage “About Me” photo | **Appearance → Customise → 🏠 Homepage → Top of the page & About Me** → *About Me photo* |
 | “Watch & Cook Along” video thumbnail | **Appearance → Customise → 🏠 Homepage → Watch & Cook Along video** → *Thumbnail photo* |
 | About Me page photos | **Pages → About Me** → click a photo → **Replace** (top toolbar) → **Update** |
-| Logo | **Appearance → Customise → ✨ Logo, site name & font** → **Select logo** |
-
-Tip: in the Customiser, nothing changes on the live site until you click **Publish**.
-
-A recipe without a photo borrows its collection’s photo until you add one.
-
----
-
-## Collections (recipe categories)
-
-Go to **Recipes → Collections**. Each collection has:
-
-- **Name**, e.g. *Fakeaways*
-- **Description**: the short line shown under its name on the website
-- **Collection photo**
-- **Where it appears**:
-  - **Main**: one of the four *Find Something Delicious* tiles on the homepage
-  - **Extra**: the *Something a little different* cards (like *Fakeaways*, *One Pan Wonders*)
-  - **Seasonal**: *Festive Favourites*, which uses the festive season settings
-  - **Filter only**: just a filter on the Recipes page (like *30 Minute Meals*)
-- **Position**: lower numbers appear first
-
-To **add a new collection** (e.g. *Air Fryer*), fill in the form on the left of the Collections page and
-click **Add New Collection**. It appears on the Recipes page, the footer and search straight away. To add it
-to the top menu, see [Menus](#menus).
-
----
-
-## Festive Favourites through the year
-
-Go to **Recipes → Festive Season & Moods**.
-
-1. Click a season button (🎄 Christmas, 💕 Valentine’s Day, 🐣 Easter, ☀️ Summer, 🎒 Back to School,
-   🎃 Halloween, 🎆 Bonfire Night). The boxes fill in for you.
-2. Change any of the wording you like.
-3. Click **Save changes**.
-
-The homepage card, the Festive Favourites page and the mood picker all update. Then tick the
-**Festive Favourites** collection on the recipes you want to include, and untick old ones when the
-season ends.
-
----
-
-## “What are you in the mood for?” buttons
-
-On the same page (**Recipes → Festive Season & Moods**), one button per line: the wording, an equals sign,
-then the collection(s) it should suggest recipes from:
-
-```
-Something quick = 30 Minute Meals
-Comfort food = Easy Family Dinners, Slow Cooker Stash
-Fakeaway night = Fakeaways
-```
-
-When someone taps a button, the site suggests one of your recipes from those collections (a different one
-each tap), or says “coming soon” if there aren’t any yet. The question above the buttons is changed in
-**Customise → 🏠 Homepage → Top of the page & About Me**.
-
----
-
-## Changing words on the homepage
-
-Go to **Appearance → Customise → 🏠 Homepage**. You’ll see the site on the right and change it live.
-
-- **Top of the page & About Me**: welcome headings and paragraphs, button wording, section headings, and
-  the About Me box (photo, heading, text, sign-off).
-  Put a word between `*stars*` in the big heading to give it the pink highlight:
-  `Family recipes you’ll *actually* make`.
-- **Slideshow**: four photos, each with a label title, a label line and a link. Leave slide 1’s wording
-  blank to always show your newest recipe. You can also set the seconds per slide.
-- **Watch & Cook Along video**: show or hide it, paste a new YouTube link, change the heading, text,
-  quick facts (`20 | Minutes from start to finish`, one per line) and which recipe the
-  **Get the Recipe** button opens.
-
-Click **Publish** to make changes live (or close the Customiser to cancel).
-
-The newest recipe and the Latest Recipes section update by themselves whenever you publish a recipe.
-
----
-
-## Editing the About Me page
-
-Go to **Pages → About Me**. It’s built with normal WordPress blocks:
-
-- click any text to change it
-- click a photo → **Replace** to swap it
-- click the **+** to add a new block (paragraph, heading, image, gallery, FAQ “Details” block…)
-- the six-dots handle moves a block up or down
-
-Click **Update** when you’re done. The **Email me** button uses the site’s admin email. To use a contact
-form instead, install a free form plugin such as *WPForms Lite* and add its block.
-
----
-
-## Menus
-
-Go to **Appearance → Menus**.
-
-- **Main menu**: the menu at the top of every page (and in the mobile menu).
-- **Footer menu**: the “More” links at the bottom.
-
-To add a page, tick it on the left and click **Add to Menu**. To add a collection, use **Custom Links**
-with the address of the Recipes page plus `#` and the collection’s slug, e.g.
-`https://yoursite.co.uk/recipes/#fakeaways`. Drag items to reorder, then click **Save Menu**.
-
-The **Recipes** column in the footer lists your collections automatically.
-
----
-
-## Newsletter sign-up
-
-The sign-up box appears at the bottom of every page. Change its words in
-**Appearance → Customise → 💌 Newsletter sign-up**.
-
-To collect real email addresses, create a free account with a newsletter service, make an
-*embedded form*, and paste its code or shortcode into **Sign-up form code**. Recommended:
-
-- **MailerLite**: easy to use, a free plan for smaller lists, and a WordPress plugin.
-- **Kit (formerly ConvertKit)**: built for creators, popular with food bloggers, also with a free plan.
-
-Until a form is pasted in, the box shows a sample form that doesn’t save emails.
-
----
-
-## Logo, site name, The Seasons font and social links
+| Logo | **Your logo is already built in**: the wide version (name and tagline) at the top of every page, the
+full version (with the spoon and fork) in the footer, and the spoon and fork as the little icon in the
+browser tab.
 
 **Appearance → Customise → ✨ Logo, site name & font**
 
-- **Logo:** click **Select logo** and upload it (a PNG with a transparent background works best). Until a
-  logo is added, the site name shows in the heading font.
-- **Site title / Tagline:** the name and the line under it (*Family recipes you’ll actually make*).
+- **Logo (top of the page):** to use a different one, click **Select logo** and upload it. A wide
+  version with a transparent background works best.
+- **Footer logo:** the larger logo at the bottom of every page. Click **Change image** to swap it.
+- **Site Icon:** the little picture in the browser tab. The spoon and fork are used until you choose one.
+- **Site title / Tagline:** used for Google and screen readers (*Family recipes you’ll actually make*).
 - **The Seasons font:** upload the licensed **.woff2** web font file and it’s used for all headings.
   Until then, the similar *Playfair Display* is used. (The Seasons is a paid font, so the web licence is
   needed to use it on a website.)
 
-**Appearance → Customise → 📱 Social media links**: paste each profile’s address. Icons only show for
-the ones filled in. The YouTube channel link also adds a **Visit my YouTube channel** button to the
-video section.
+**Appearance → Customise → 📱 Social media links**: Instagram, Facebook, TikTok and YouTube are
+already filled in. Change or clear any of them, or add Pinterest. Icons only show for the ones filled in.
+The YouTube channel link is also used for the **Visit my YouTube channel** button in the video section.
+
+---
+
+## Advertising (for later)
+
+The site is ready for adverts whenever you are. **Nothing shows until you switch it on**, and you
+won’t need any changes to the website itself.
+
+**When you’re ready:**
+
+1. Apply to an ad network. Popular choices for food bloggers are **Mediavine** (including its
+   *Journey* programme for growing sites), **Raptive**, or **Google AdSense** (no minimum traffic).
+   Each network has its own traffic requirements, so check their current criteria.
+2. Go to **Appearance → Customise → 💷 Advertising (for later)**.
+3. Paste the code they give you into **Code for the &lt;head&gt;**.
+4. Paste their **ads.txt** lines into the **ads.txt** box. They appear at `yoursite.co.uk/ads.txt`
+   (networks check this during approval, so you can add it before turning adverts on).
+5. Tick **Turn on adverts** and click **Publish**.
+
+**Ad spaces:** most networks (Mediavine, Raptive, AdSense *Auto ads*) place adverts automatically, so
+you may only need step 3. If your network gives you code for fixed spots, there are six ready-made
+ad spaces you can paste it into:
+
+- Homepage – after *Something a little different*
+- Homepage – after *Latest Recipes*
+- Recipe page – after the recipe
+- Recipe page – after *You might also like*
+- Recipes page – below the recipe list
+- Every page – above the newsletter sign-up
+
+**See where they are:** while logged in, add `?ads=preview` to the end of any page address
+(e.g. `yoursite.co.uk/?ads=preview`) to see dashed “Advert space” boxes.
+
+**Built with adverts in mind:**
+
+- Each recipe page includes the full recipe in the page itself, so ad networks and Google can read it.
+- **Cook Mode never shows adverts**, so cooking along stays clean and easy.
+- Turning adverts off again is one untick.
+
+**Before going live with adverts:** UK law requires visitors to agree to advertising cookies. Most ad
+networks provide a cookie consent banner. Otherwise use a consent plugin such as *Complianz*. Also
+update your **Privacy Policy** page (**Settings → Privacy**).
 
 ---
 
@@ -332,12 +255,15 @@ about.js                 Mock-up About page (gallery lightbox, contact form)
 wordpress/amy-recipes/        The plugin (recipe post type, collections, form, parser, settings, guide)
 wordpress/amy-louise-crisp/   The theme (templates, Customiser, first-run setup)
 wordpress/build.sh            Copies the shared files into the theme and builds wordpress/dist/*.zip
+img/logo/                     Logo files (wordmark, full, icon, favicons) made from Amy's logo
 ```
 
 The front-end scripts read `window.ALC_DATA`. In the mock-up that comes from `data.js`; in WordPress the
 plugin builds the same structure from recipes, collections and settings (`alc_site_data()`), so both
 share one set of scripts. After changing a shared file, run `bash wordpress/build.sh` and commit the
 new zips.
+
+Ad spaces: `alc_ad( 'slot' )` in the theme templates (`inc/ads.php`); the mock-up shows them with `?ads=preview`.
 
 **Mock-up only:** to add a recipe to the static mock-up, copy the recipe block in `data.js`. Change the
 festive season with `season` at the top of the same file.

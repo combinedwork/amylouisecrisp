@@ -68,11 +68,12 @@ function alc_defaults() {
 		'news_small'      => 'One email a month. Unsubscribe anytime.',
 		'news_embed'      => '',
 		// Social
-		'alc_instagram'   => '',
-		'alc_facebook'    => '',
+		'alc_instagram'   => 'https://www.instagram.com/amylouisecrisp.x/',
+		'alc_facebook'    => 'https://www.facebook.com/profile.php?id=61556348852629',
 		'alc_pinterest'   => '',
-		'alc_tiktok'      => '',
-		'alc_youtube'     => '',
+		'alc_tiktok'      => 'https://www.tiktok.com/@amylouisecrisp.x',
+		'alc_youtube'     => 'https://www.youtube.com/channel/UCjtX0o8ZOkc6L4hd2mzneVA',
+		'footer_logo'     => alc_theme_img( 'logo/logo-full.png' ),
 	);
 }
 
@@ -184,5 +185,13 @@ add_action( 'customize_register', function ( $wp ) {
 		'description' => 'Upload the licensed web font file (.woff2) for “The Seasons” and it will be used for headings. Until then a similar font is used.',
 		'priority'    => 60,
 	) ) );
+	$wp->add_setting( 'footer_logo', array( 'default' => alc_theme_img( 'logo/logo-full.png' ), 'sanitize_callback' => 'esc_url_raw' ) );
+	$wp->add_control( new WP_Customize_Image_Control( $wp, 'footer_logo', array(
+		'section'     => 'title_tagline',
+		'label'       => 'Footer logo',
+		'description' => 'The larger logo at the bottom of every page.',
+		'priority'    => 9,
+	) ) );
+	$wp->get_control( 'custom_logo' )->description = 'Your logo is already built into the theme. To use a different one, click “Select logo”. A wide version (name and tagline side by side) works best at the top of the page.';
 	$wp->get_section( 'title_tagline' )->title = '✨ Logo, site name & font';
 } );
